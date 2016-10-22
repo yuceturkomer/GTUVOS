@@ -29,14 +29,10 @@ namespace GTUVOS
     
     /**
     * Run MailServer
-    * 
-    * -Set "widget" variable
-    * -Set "isItClosed" variable true
+    *
     * -Call the readInput function for read input from the terminal
     */
     void MailServer::runMailServer(){
-        setWidget();
-        setIsItClosed(true);
         readInput();
     }
 
@@ -162,9 +158,6 @@ namespace GTUVOS
      * -Handle other stuff
      */
     void MailServer::shutdownMailServer(){
-        
-        setIsItClosed(false); // Set "isItClosed" variable false
-       
        /**
          * You must implement this function
          */

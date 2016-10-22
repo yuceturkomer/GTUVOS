@@ -22,7 +22,7 @@ namespace
      */
 }
 
-namespace GtuVirtualOperatingSystem
+namespace GTUVOS
 {      
     /**
     * Default Constructors
@@ -48,9 +48,6 @@ namespace GtuVirtualOperatingSystem
     * -Call the readInput function for read input from the terminal
     */
     void VirtualOperatingSystemForm::runOS(){
-
-        setWidget(); //Set "widget" variable
-        setIsItClosed(true); // Set "isItClosed" variable true
         checkSourceFileDirectory(); // Check the our source directory
         readInput(); // for read input from the terminal
     }
@@ -143,8 +140,8 @@ namespace GtuVirtualOperatingSystem
     * Get MailBox Object and run it.
     */
     void VirtualOperatingSystemForm::getMailBox(){
-        mailbox.runMailBox();
-        mailbox.show();
+        mailserver.runMailServer();
+        //mailserver.show();
     }
 
     /**
@@ -153,12 +150,7 @@ namespace GtuVirtualOperatingSystem
      * @param newString will printed
      */
     void VirtualOperatingSystemForm::writeGivenStringOnTheScreen(string newString){
-        
-        /**
-         * You must implement this function
-         * You need some Qt skills.
-         */
-        
+
     }
     
     /**
@@ -168,11 +160,6 @@ namespace GtuVirtualOperatingSystem
     * -Handle other stuff
     */
    void VirtualOperatingSystemForm::shutdownOS() {
-       setIsItClosed(false); // Set "isItClosed" variable false
-       
-       /**
-         * You must implement this function
-         */
    
    } 
 
@@ -207,4 +194,5 @@ namespace GtuVirtualOperatingSystem
          * You will implement this function
          */
     }
+
 }

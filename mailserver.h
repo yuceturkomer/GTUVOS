@@ -1,33 +1,37 @@
 #ifndef MAILSERVER_H
 #define MAILSERVER_H
 
+#include <string>
+
+using std::string;
+
 namespace GTUVOS {
 
-class MailServer{
 
-    public:
+
+class MailServer{
 public:
     /**
     * Default Constructors
     *
-    * -Check MailBox Directory
+    * -Check MailServer Directory
     * -Check the mailArchive file
     */
-    MailBox();
+    MailServer();
 
     /**
     * Virtual Constructors
     */
-    virtual ~MailBox();
+    virtual ~MailServer();
 
     /**
-    * Run MailBox
+    * Run MailServer
     *
     * -Set "widget" variable
     * -Set "isItClosed" variable true
     * -Call the readInput function for read input from the terminal
     */
-    void runMailBox();
+    void runMailServer();
 
     /**
      * This function is read input from the terminal
@@ -50,8 +54,8 @@ public:
      * Available commands:
      *      -readMail
      *      -sendMail
-     *      -shutdownMailBox
-     *      -helpMailBoxForCommands
+     *      -shutdownMailServer
+     *      -helpMailServerForCommands
      *
      * @param newString will parsed
      */
@@ -73,21 +77,21 @@ public:
     void sendMail();
 
     /**
-     * Check the mailbox directory
+     * Check the MailServer directory
      *
-     * -Check the mailbox directory which is called "MailBox".
-     * "MailBox" directory is in the our source directory which is called "SourceFileGtuOS"
-     * if the "MailBox" directory doesn't exist then create it.
+     * -Check the MailServer directory which is called "MailServer".
+     * "MailServer" directory is in the our source directory which is called "SourceFileGtuOS"
+     * if the "MailServer" directory doesn't exist then create it.
      *
      */
-    void checkMailBoxDirectory();
+    void checkMailServerDirectory();
 
     /**
      * Check the mailArchive file
      *
      * -Set mailArchiveFileName
      * -Check the mailArchive file..
-     * mailArchive file is in the "MailBox" directory.
+     * mailArchive file is in the "MailServer" directory.
      * if the mailArchive file doesn't exist then create it.
      */
     void checkMailArchiveFile();
@@ -100,39 +104,21 @@ public:
     void writeGivenStringOnTheScreen(string newString);
 
     /**
-     * Shutdown MailBox
+     * Shutdown MailServer
      *
      * -Set "isItClosed" variable false
      * -Handle other stuff
      */
-    void shutdownMailBox();
+    void shutdownMailServer();
 
     /**
      * Print All available commands On The Screen
      *
      * -Use "writeGivenStringOnTheScreen" function for print
      */
-    void helpMailBoxForCommands();
+    void helpMailServerForCommands();
 
-    /**
-     * Get widget
-     */
-    Ui::MailBox getWidget() const{return widget;}
 
-    /**
-     * Set widget
-     */
-    void setWidget() {widget.setupUi(this);}
-
-    /**
-     * Get isItClosed
-     */
-    bool getIsItClosed() const{return isItClosed;}
-
-    /**
-     * Set isItClosed
-     */
-    void setIsItClosed(bool newBoolValue) {isItClosed = newBoolValue ;}
 
     /**
      * Get mailArchiveFileName
@@ -147,23 +133,11 @@ public:
 
 private:
     /**
-     * Widget
-     */
-    Ui::MailBox widget;
-
-    /**
-    * -if this variable is true, MailBox continues to run
-    * -if this variable is false, MailBox doesn't continues to run
-    */
-    bool isItClosed;
-
-    /**
      * Mail Archive File Name
      */
     string mailArchiveFileName;
 
+};
 }
-}
-
 
 #endif // MAILSERVER_H

@@ -1,31 +1,19 @@
-/**
- * Virtual Operating System
- *
- * File:   VirtualOperatingSystemForm.h
- *
- * Description:
- *
- * 
- *
- *
- * @author CSE_343_Software Engineering_Group_2
- * @since Monday 10 October 2016
- */
 
 #ifndef _VIRTUALOPERATINGSYSTEMFORM_H
 #define _VIRTUALOPERATINGSYSTEMFORM_H
 
-#include "ui_VirtualOperatingSystemForm.h"
-#include "MailBox.h"
+#include <QMainWindow>
+#include "mailserver.h"
 
 using std::string; // for string
 
-namespace GtuVirtualOperatingSystem
-
+namespace GTUVOS
 {
     class VirtualOperatingSystemForm : public QMainWindow {
         Q_OBJECT
+
     public:
+
         
         /**
         * Default Constructors
@@ -124,27 +112,7 @@ namespace GtuVirtualOperatingSystem
          */
         void shutdownOS();
         
-        /**
-         * Get widget
-         */
-        Ui::VirtualOperatingSystemForm getWidget() const{return widget;}
-        
-        /**
-         * Set widget
-         */
-        void setWidget() {widget.setupUi(this);}
-        
-        /**
-         * Get isItClosed
-         */
-        bool getIsItClosed() const{return isItClosed;}
-        
-        /**
-         * Set isItClosed
-         */
-        void setIsItClosed(bool newBoolValue) {isItClosed = newBoolValue ;}
-        
-        
+
         /*EXTRA COMMANDS*/
         
         /**
@@ -163,21 +131,7 @@ namespace GtuVirtualOperatingSystem
         void cd();
         
     private:
-        /**
-         * Widget
-         */
-        Ui::VirtualOperatingSystemForm widget; 
-        
-        /**
-        * if this variable is true, The Operating System continues to run
-        * if this variable is false, The Operating System doesn't continues to run
-        */
-        bool isItClosed;
-        
-        /*
-         * MailBox Object
-         */
-        MailBox mailbox;
+    MailServer mailserver;
         
     };
 }
