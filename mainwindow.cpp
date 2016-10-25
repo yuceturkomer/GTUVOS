@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qmessagebox.h"
-#include <cstring>
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,12 +19,16 @@ MainWindow::~MainWindow()
 void MainWindow::on_lineEdit_returnPressed()
 {
 
-    QString gelenDeger=ui->lineEdit->text();
-    QStringList lines =gelenDeger.split(" ");
+    QString gelenDeger=ui->lineEdit->text();//lineEdit'de bulunan degeri aldim.
+    QStringList lines =gelenDeger.split(" ");//Bosluga gore ayirip string list e attim.
 
 
+    //message box'a suanlik lineEdit in kac kelimeden olustugunu aldim.
     QMessageBox::information(this,"baslık",QString::number(lines.count()));
-    ui->textBrowser->insertPlainText(QString::number(lines.count()));
-    // ui->textBrowser->setText(Satir0+" fonksiyonuma "+Satir1+" parametresi gonderiliyor\n");
+
+    //Bu degeri textBrowser'a yazdim.
+    ui->textBrowser->insertPlainText(QString::number(lines.count())+"\n");
+
+    //lineEdit'i temizledim.
     ui->lineEdit->setText("");
 }
