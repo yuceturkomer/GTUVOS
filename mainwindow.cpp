@@ -21,11 +21,9 @@ void MainWindow::on_lineEdit_returnPressed()
     QString gelenDeger=ui->lineEdit->text();
     QStringList lines =gelenDeger.split(" ");
 
-   // QString Satir0 = lines.at(0);
-    //QString Satir1 = lines.at(1);
 
-     QMessageBox::information(this,"baslık",QString::number(lines.count()));
+    QMessageBox::information(this,"baslık",QString::number(lines.count()));
     ui->textBrowser->insertPlainText(QString::number(lines.count()));
-   // ui->textBrowser->setText(Satir0+" fonksiyonuma "+Satir1+" parametresi gonderiliyor\n");
+    // ui->textBrowser->setText(Satir0+" fonksiyonuma "+Satir1+" parametresi gonderiliyor\n");
     ui->lineEdit->setText("");
 }
