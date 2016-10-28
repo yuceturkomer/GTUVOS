@@ -5,8 +5,8 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    VirtualOperatingSystemForm.cpp \
-    mailserver.cpp
+    mailserver.cpp \
+    gtuvos.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,8 +19,7 @@ include(deployment.pri)
 HEADERS += \
     mailserver.h \
     mainwindow.h \
-    VirtualOperatingSystemForm.h
+    gtuvos.h
 
 FORMS += \
-    mainwindow.ui \
-    VirtualOperatingSystemForm.ui
+    mainwindow.ui
