@@ -1,179 +1,169 @@
 #include "mailserver.h"
 
-namespace
-{
+/**
+* Default Constructors
+*
+* -Check MailServer Directory
+* -Check the mailArchive file
+*/
+MailServer::MailServer() {
+    checkMailServerDirectory(); // Check MailServer Directory
+    checkMailArchiveFile(); // Check MailArchiveFile
+}
+
+/**
+* Virtual Constructors
+*/
+MailServer::~MailServer() {
+}
+
+/**
+* Run MailServer
+*
+* -Call the readInput function for read input from the terminal
+*/
+void MailServer::runMailServer(){
+    readInput();
+}
+
+/**
+ * This function is read input from the terminal
+ *
+ * -Read input from the terminal
+ * -Call the parseString function
+ * -If "isItClosed" variable true then wait the next input.
+ * -if "isItClosed" variable false then interrupt loop
+ */
+void MailServer::readInput(){
+
     /**
-     * For Constant Variables
-     * 
+     * You must implement this function
+     * You need some Qt skills.
      */
 }
 
-namespace GTUVOS
-{     
-    /**
-    * Default Constructors
-    * 
-    * -Check MailServer Directory
-    * -Check the mailArchive file
-    */
-    MailServer::MailServer() {
-        checkMailServerDirectory(); // Check MailServer Directory
-        checkMailArchiveFile(); // Check MailArchiveFile
-    }
+/**
+ * This function parses the newString, then calls the appropriate function
+ *
+ * -parse the newString
+ * -if newString is meaningful then call the appropriate command
+ * -if newString is not meaningful then call the function
+ * "writeGivenStringOnTheScreen" and give the error message.
+ *
+ * Available commands:
+ *      -readMail
+ *      -sendMail
+ *      -shutdownMailServer
+ *      -helpMailServerForCommands
+ *
+ * @param newString will parsed
+ */
+void MailServer::parseString(string newString){
 
     /**
-    * Virtual Constructors
-    */
-    MailServer::~MailServer() {
-    }
-    
-    /**
-    * Run MailServer
-    *
-    * -Call the readInput function for read input from the terminal
-    */
-    void MailServer::runMailServer(){
-        readInput();
-    }
-
-    /**
-     * This function is read input from the terminal
-     * 
-     * -Read input from the terminal
-     * -Call the parseString function
-     * -If "isItClosed" variable true then wait the next input.
-     * -if "isItClosed" variable false then interrupt loop
+     * You must implement this function
      */
-    void MailServer::readInput(){
-        
-        /**
-         * You must implement this function
-         * You need some Qt skills.
-         */
-    }
+
+}
+
+/**
+ * Print all mail Archive
+ *
+ * -Read mailArchive file. Call the function
+ * "writeGivenStringOnTheScreen" and print the all mail Archive.
+ */
+void MailServer::readMail(){
 
     /**
-     * This function parses the newString, then calls the appropriate function
-     * 
-     * -parse the newString
-     * -if newString is meaningful then call the appropriate command
-     * -if newString is not meaningful then call the function
-     * "writeGivenStringOnTheScreen" and give the error message.
-     * 
-     * Available commands:
-     *      -readMail
-     *      -sendMail
-     *      -shutdownMailServer
-     *      -helpMailServerForCommands
-     * 
-     * @param newString will parsed
+     * You must implement this function
      */
-    void MailServer::parseString(string newString){
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
+
+}
+
+/**
+ * Send Mail
+ *
+ * -Write mail into mailArchive file
+ */
+void MailServer::sendMail(){
 
     /**
-     * Print all mail Archive
-     * 
-     * -Read mailArchive file. Call the function
-     * "writeGivenStringOnTheScreen" and print the all mail Archive.
+     * You must implement this function
      */
-    void MailServer::readMail(){
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
+
+}
+
+/**
+ * Check the MailServer directory
+ *
+ * -Check the MailServer directory which is called "MailServer".
+ * "MailServer" directory is in the our source directory which is called "SourceFileGtuOS"
+ * if the "MailServer" directory doesn't exist then create it.
+ *
+ */
+void MailServer::checkMailServerDirectory(){
 
     /**
-     * Send Mail
-     * 
-     * -Write mail into mailArchive file
+     * You must implement this function
      */
-    void MailServer::sendMail(){
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
+
+}
+
+/**
+ * Check the mailArchive file
+ *
+ * -Set mailArchiveFileName
+ * -Check the mailArchive file..
+ * mailArchive file is in the "MailServer" directory.
+ * if the mailArchive file doesn't exist then create it.
+ */
+void MailServer::checkMailArchiveFile(){
+
+    setMailArchiveFileName("mailArchive.txt");
 
     /**
-     * Check the MailServer directory
-     * 
-     * -Check the MailServer directory which is called "MailServer".
-     * "MailServer" directory is in the our source directory which is called "SourceFileGtuOS"
-     * if the "MailServer" directory doesn't exist then create it.
-     * 
+     * You must implement this function
      */
-    void MailServer::checkMailServerDirectory(){
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
+
+}
+
+/**
+ * Print Given String On The Screen
+ *
+ * @param newString will written
+ */
+void MailServer::writeGivenStringOnTheScreen(string newString){
 
     /**
-     * Check the mailArchive file
-     * 
-     * -Set mailArchiveFileName
-     * -Check the mailArchive file..
-     * mailArchive file is in the "MailServer" directory.
-     * if the mailArchive file doesn't exist then create it.
+     * You must implement this function
+     * You need some Qt skills.
      */
-    void MailServer::checkMailArchiveFile(){
-        
-        setMailArchiveFileName("mailArchive.txt");
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
+
+}
+
+/**
+ * Shutdown MailServer
+ *
+ * -Set "isItClosed" variable false
+ * -Handle other stuff
+ */
+void MailServer::shutdownMailServer(){
+   /**
+     * You must implement this function
+     */
+
+}
+
+/**
+ * Print All available commands On The Screen
+ *
+ * -Use "writeGivenStringOnTheScreen" function for print
+ */
+void MailServer::helpMailServerForCommands(){
 
     /**
-     * Print Given String On The Screen
-     * 
-     * @param newString will written
+     * You must implement this function
      */
-    void MailServer::writeGivenStringOnTheScreen(string newString){
-        
-        /**
-         * You must implement this function
-         * You need some Qt skills.
-         */
-        
-    }
 
-    /**
-     * Shutdown MailServer
-     * 
-     * -Set "isItClosed" variable false
-     * -Handle other stuff
-     */
-    void MailServer::shutdownMailServer(){
-       /**
-         * You must implement this function
-         */
-        
-    }
 
-    /**
-     * Print All available commands On The Screen
-     * 
-     * -Use "writeGivenStringOnTheScreen" function for print
-     */
-    void MailServer::helpMailServerForCommands(){
-        
-        /**
-         * You must implement this function
-         */
-        
-    }
 }

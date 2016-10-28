@@ -5,9 +5,6 @@
 
 using std::string;
 
-namespace GTUVOS {
-
-
 
 class MailServer{
 public:
@@ -138,6 +135,5 @@ private:
     string mailArchiveFileName;
 
 };
-}
 
 #endif // MAILSERVER_H

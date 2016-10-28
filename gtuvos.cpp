@@ -11,20 +11,23 @@ GTUVOS::GTUVOS(){
     version = 0.1;
 
     prepareSystem();
+
+    cout<<"GTUVOS constructed!"<<endl;
 }
 
 void GTUVOS::prepareSystem(){
-    cout<< "GTUVOS prepared!!"<<endl;
+    cout<< "GTUVOS prepareSystem started!!"<<endl;
 }
 
 
 vector<string> GTUVOS::parseStr(string str){
-    cout<<"parseStr: "<<str<<endl;
+    cout<<"parseStr is started, param: "<<str<<endl;
     vector<string> parses;
 
-    parses.push_back("fuckSercan");
+    parses.push_back("InvalidTokes");
     return parses;
 }
+
 
 bool GTUVOS::executeCmd(string str){
     vector<string> parses = parseStr(str);

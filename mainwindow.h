@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "ui_mainwindow.h"
+#include <QApplication>
+#include <ui_mainwindow.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,7 +18,8 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_lineEdit_returnPressed();
+
+    void on_inputBox_returnPressed();
 
 private:
     Ui::MainWindow *ui;

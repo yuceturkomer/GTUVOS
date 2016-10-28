@@ -1,5 +1,5 @@
+#include <QApplication>
 #include "mainwindow.h"
-#include "qmessagebox.h"
 #include "gtuvos.h"
 
 
@@ -10,8 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     // get system informations and print on startup
     double version = GTUVOS::getInstance()->getVersion();
     QString name = QString::fromStdString(GTUVOS::getInstance()->getName());
-    ui->textBrowser->insertPlainText("Welcome to "+name+"\n");
-    ui->textBrowser->insertPlainText("Version "+QString::number(version)+"\n");
+    ui->terminalScreen->insertPlainText("Welcome to "+name+"\n");
+    ui->terminalScreen->insertPlainText("Version "+QString::number(version)+"\n");
+
 }
 
 MainWindow::~MainWindow()
@@ -19,21 +20,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_lineEdit_returnPressed()
+void MainWindow::on_inputBox_returnPressed()
 {
-    QString gelenDeger=ui->lineEdit->text();//lineEdit'de bulunan degeri aldim.
+    QString command=ui->inputBox->text();//lineEdit'de bulunan degeri aldim.
 
-    bool res = GTUVOS::getInstance()->executeCmd(gelenDeger.toStdString());
+    bool res = GTUVOS::getInstance()->executeCmd(command.toStdString());
 
-    QStringList lines =gelenDeger.split(" ");//Bosluga gore ayirip string list e attim.
-
+    //QStringList lines =command.split(" ");//Bosluga gore ayirip string list e attim.
 
     //QMessageBox::information(this,"baslık",QString::number(lines.count()));
 
     //Bu degeri textBrowser'a yazdim.
     if(res)
-        ui->textBrowser->insertPlainText("cmd success\n");
+        ui->terminalScreen->insertPlainText("cmd success\n");
 
     //lineEdit'i temizledim.
-    ui->lineEdit->setText("");
+    ui->inputBox->setText("");
 }
+
