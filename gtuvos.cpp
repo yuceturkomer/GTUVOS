@@ -1,6 +1,8 @@
 #include <iostream>
 #include "gtuvos.h"
 #include <vector>
+#include <QApplication>
+#include <QVector>
 
 // begin of the constant variables about copyFile function
 const static int  SUCCESS_STATUS = 0;
@@ -32,20 +34,66 @@ void GTUVOS::prepareSystem(){
     cout<< "GTUVOS prepareSystem started!!"<<endl;
 }
 
+/* Function takes a QString type string and splits it according to spaces in it, then returns that
+ * in a vector form. If the str's size is 0, the "Insufficient Tokens" will be pushed to de vector and returns vector instantly.
+ * If the size is not 0, for each element in stringList, which was already split by whitespaces, will be transformed into a
+ * standart string from QString type and then it is pushed to the return vector which named as parses.
+ *
+ * @param str the QString type string
+ * @return A vector of strings. Each element is parsed and will not include any whitespaces. *
+ */
+vector<string> GTUVOS::parseStr(QString str){
+    cout<<endl<<"parseStr is started, param: "<<str.toStdString()<<endl;
 
-vector<string> GTUVOS::parseStr(string str){
-    cout<<"parseStr is started, param: "<<str<<endl;
+    QStringList stringlist =str.split(" ");
     vector<string> parses;
 
-    parses.push_back("InvalidTokes");
+    if(str.size() == 0){
+        parses.push_back("InsufficientNumberOfTokens");
+        return parses;
+    }
+
+    foreach (QString iter, stringlist) {
+       parses.push_back(iter.toStdString());
+    }
+
     return parses;
 }
 
+/* This function executes the command if possible and returns true. To decide this it calls the parseStr function and
+ * looks at the return value's first element.
+ * Else if not possible function will return false.
+ *
+ * @param str the QString type string which contains full command and parameters for commands if there can be.
+ * @return If it's an available command returns true, else returns false.
+ *
+ */
+bool GTUVOS::executeCmd(QString str){
+    vector<string> parses = parseStr(str);// Call of parseStr function.
 
-bool GTUVOS::executeCmd(string str){
-    vector<string> parses = parseStr(str);
+    foreach (string tempStr, parses) {
+        cout<<tempStr<<endl;
+    }
 
-    cout<<parses[0]<<endl;
+    string command = parses.front();// First element of vector parses. Used for deciding the command.
+
+    if(command == "cp"){
+        cout<<"Command copyfile will be executed."<<endl<<endl;
+    }else if (command == "mail"){
+        cout<<"Mailbox window will be opened."<<endl<<endl;
+    }else if (command == "help" || command == "Help" ){
+        cout<<"The available commands are:"<<endl
+            <<"help"<<endl
+            <<"cp <file_1> <file_2>"<<endl
+            <<"mail"<<endl<<endl;
+    }else if (command == "exit" || command == "Exit" || command == "quit" || command == "Quit" ){
+        cout<<" ~~~~ System shutdown command entered! ~~~~ "<<endl<<endl;
+    }else{
+        cout<<"There is no such command."<<endl<<endl;
+        return false;
+    }
+
+
     return true;
 }
 
