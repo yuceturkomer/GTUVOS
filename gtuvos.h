@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <QApplication>
 #include "mailserver.h"
 
 // begin of the library about copyFile function
@@ -30,7 +31,7 @@ public:
         return instance;
     }
 
-    bool executeCmd(string str); // execute command and return result
+    bool executeCmd(QString str); // execute command and return result
 
     double getVersion() const; // get system version number
     string getName() const; // get system name
@@ -174,7 +175,7 @@ private:
      *
      * @param newString will parsed
      */
-    vector<string> parseStr(string str);
+    vector<string> parseStr(QString str);
 };
 
 
