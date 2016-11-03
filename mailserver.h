@@ -1,25 +1,21 @@
 #ifndef MAILSERVER_H
 #define MAILSERVER_H
-
+#include <QWidget>
 #include <string>
 
 using std::string;
 
+namespace Ui {
+class MailServer;
+}
 
-class MailServer{
+class MailServer : public QWidget
+{
+    Q_OBJECT
+
 public:
-    /**
-    * Default Constructors
-    *
-    * -Check MailServer Directory
-    * -Check the mailArchive file
-    */
-    MailServer();
-
-    /**
-    * Virtual Constructors
-    */
-    virtual ~MailServer();
+    explicit MailServer(QWidget *parent = 0);
+    ~MailServer();
 
     /**
     * Run MailServer
@@ -128,12 +124,22 @@ public:
     void setMailArchiveFileName(string newMailArchiveFileName) {mailArchiveFileName = newMailArchiveFileName ;}
 
 
+private slots:
+    /**
+     * push the sendMail button
+     */
+    void on_pushButton_clicked();
+
 private:
+    /**
+     * For MailServer user interface
+    */
+    Ui::MailServer *ui;
+
     /**
      * Mail Archive File Name
      */
     string mailArchiveFileName;
-
 };
 
 #endif // MAILSERVER_H

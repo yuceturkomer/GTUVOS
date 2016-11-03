@@ -22,4 +22,5 @@ HEADERS += \
     gtuvos.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    mailserver.ui
