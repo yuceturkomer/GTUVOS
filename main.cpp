@@ -4,8 +4,9 @@
 
 int main(int argc, char *argv[])
 {
-    GTUVOS::getInstance();
+
     QApplication app(argc,argv);
+    GTUVOS::getInstance();
 
     MainWindow m;
     m.show();

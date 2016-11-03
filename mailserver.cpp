@@ -1,4 +1,6 @@
 #include "mailserver.h"
+#include "ui_mailserver.h"
+#include "qmessagebox.h"
 
 /**
 * Default Constructors
@@ -6,7 +8,11 @@
 * -Check MailServer Directory
 * -Check the mailArchive file
 */
-MailServer::MailServer() {
+MailServer::MailServer(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::MailServer)
+{
+    ui->setupUi(this);
     checkMailServerDirectory(); // Check MailServer Directory
     checkMailArchiveFile(); // Check MailArchiveFile
 }
@@ -14,7 +20,9 @@ MailServer::MailServer() {
 /**
 * Virtual Constructors
 */
-MailServer::~MailServer() {
+MailServer::~MailServer()
+{
+    delete ui;
 }
 
 /**
@@ -166,4 +174,23 @@ void MailServer::helpMailServerForCommands(){
      */
 
 
+}
+
+void MailServer::on_pushButton_clicked()
+{
+    QString from=ui->from->text();
+    QString to=ui->to->text();
+    QString subject=ui->subject->text();
+    QString composeMail=ui->composeMail->toPlainText();
+
+
+    //For the Test.
+    QMessageBox::information(this,"From",from);
+    QMessageBox::information(this,"To",to);
+    QMessageBox::information(this,"Subject",subject);
+    QMessageBox::information(this,"Compose email",composeMail);
+
+
+    //islem bitince ekrani kapatma.Suanlik kapali kalsin.
+    //MailServer::close();
 }

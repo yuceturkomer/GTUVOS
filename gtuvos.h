@@ -154,6 +154,9 @@ public:
     void cd();
 
 private:
+    //MailServer object.To open the new window.
+    MailServer mailServerUi;
+
     void prepareSystem();
     GTUVOS(); // singleton design
     string name;

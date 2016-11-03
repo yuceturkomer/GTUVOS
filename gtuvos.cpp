@@ -81,6 +81,7 @@ bool GTUVOS::executeCmd(QString str){
         cout<<"Command copyfile will be executed."<<endl<<endl;
     }else if (command == "mail"){
         cout<<"Mailbox window will be opened."<<endl<<endl;
+        mailServerUi.show();//mailServer window should be opened.
     }else if (command == "help" || command == "Help" ){
         cout<<"The available commands are:"<<endl
             <<"help"<<endl
