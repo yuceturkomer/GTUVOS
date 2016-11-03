@@ -97,7 +97,7 @@ int GTUVOS::copyFile(string filePath, string targetPath, int ifTheFileAlreadyExi
     // Open the source file
     int source = open(filePath.c_str(), O_RDONLY, 0);
 
-    /* If filePath didn't open */
+    // If filePath didn't open
     if(source < SUCCESS_STATUS)
         return FILE_PATH_NOT_EXIST_OR_NOT_A_FILE;
 
@@ -140,6 +140,11 @@ int GTUVOS::copyFile(string filePath, string targetPath, int ifTheFileAlreadyExi
                     // make the file name which will created
                     theNameOfTheCopyFileCreated->clear();
                     theNameOfTheCopyFileCreated->append(nameOfFile);
+
+                    // if the created file was deleted during the process then return CREATED_FILE_DELETED_DURING_COPY_PROCESS.
+                    if(!isItAFile(pathOfTheFileToBeCopied))
+                        return CREATED_FILE_DELETED_DURING_COPY_PROCESS;
+
                     return  IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME;
                     break;
                 }
@@ -153,6 +158,11 @@ int GTUVOS::copyFile(string filePath, string targetPath, int ifTheFileAlreadyExi
                     // make the file name which will created
                     theNameOfTheCopyFileCreated->clear();
                     theNameOfTheCopyFileCreated->append(nameOfFile);
+
+                    // if the created file was deleted during the process then return CREATED_FILE_DELETED_DURING_COPY_PROCESS.
+                    if(!isItAFile(pathOfTheFileToBeCopied))
+                        return CREATED_FILE_DELETED_DURING_COPY_PROCESS;
+
                     return IF_THE_FILE_ALREADY_EXISTS_OVERWRITE;
                    break;
                 }
@@ -192,13 +202,13 @@ int GTUVOS::copyFile(string filePath, string targetPath, int ifTheFileAlreadyExi
  */
 bool GTUVOS::isItAFile(string filePath){
 
-    FILE *filePtrInputFile = fopen(filePath.c_str(),"r"); /* Open File */
+    FILE *filePtrInputFile = fopen(filePath.c_str(),"r"); // Open File
 
-    /* If filePath didn't a file name */
+    // If filePath didn't a file name
     if (!filePtrInputFile)
         return false; // filePath is not a file name
 
-    /* Close File */
+    // Close File
     fclose(filePtrInputFile);
 
     return true;// filePath is a file name
@@ -212,13 +222,13 @@ bool GTUVOS::isItAFile(string filePath){
  */
 bool GTUVOS::isItADirectory(string dirPath){
 
-    DIR* dirPtrInputDirectory = opendir (dirPath.c_str()); /* Open Directory */
+    DIR* dirPtrInputDirectory = opendir (dirPath.c_str()); // Open Directory
 
-    /* If dirPath didn't a directory name */
+    // If dirPath didn't a directory name
     if (!dirPtrInputDirectory)
         return false; // dirPath is not a directory name
 
-    /* Close directory */
+    // Close directory
     closedir(dirPtrInputDirectory);
 
     return true;// dirPath is a directory name
@@ -315,14 +325,14 @@ bool GTUVOS::findTheUniqueNameInThePath(string* filePath){
     // loop for finding unique name
     while(true){
 
-        FILE *filePtrInputFile = fopen(filePath->c_str(),"r"); /* Open File */
+        FILE *filePtrInputFile = fopen(filePath->c_str(),"r"); // Open File
 
-        /* If filePath didn't a file name */
+        // If filePath didn't a file name
         if (!filePtrInputFile){
             return true; // end of the loop
         }
 
-        /* Close File */
+        // Close File
         fclose(filePtrInputFile);
 
         // try a new name
