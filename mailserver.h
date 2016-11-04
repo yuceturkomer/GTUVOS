@@ -1,9 +1,17 @@
 #ifndef MAILSERVER_H
 #define MAILSERVER_H
 #include <QWidget>
+#include <QPushButton>
 #include <string>
+#include <vector>
+#include "mail.h"
+#include <fstream>
 
 using std::string;
+using std::vector;
+using std::ifstream;
+using std::ofstream;
+
 
 namespace Ui {
 class MailServer;
@@ -116,12 +124,11 @@ public:
     /**
      * Get mailArchiveFileName
      */
-    string getMailArchiveFileName() const{return mailArchiveFileName;}
+    string getSentMailArchiveFileName() const{return sentMailFile;};
+    string getRecievedMailArchiveFileName() const{return recievedMailFile;}
 
-    /**
-     * Set mailArchiveFileName
-     */
-    void setMailArchiveFileName(string newMailArchiveFileName) {mailArchiveFileName = newMailArchiveFileName ;}
+
+
 
 
 private slots:
@@ -139,7 +146,14 @@ private:
     /**
      * Mail Archive File Name
      */
-    string mailArchiveFileName;
+    string sentMailFile;
+    string recievedMailFile;
+//    ifstream recievedMailFileArchive;
+//    ofstream sentMailFileArchive;
+
+    vector<mail> sentMail;
+    vector<mail> recievedMail;
+    vector<mail> draftMail;
 };
 
 #endif // MAILSERVER_H

@@ -2,6 +2,7 @@
 #include "ui_mailserver.h"
 #include "qmessagebox.h"
 
+
 /**
 * Default Constructors
 *
@@ -13,8 +14,16 @@ MailServer::MailServer(QWidget *parent) :
     ui(new Ui::MailServer)
 {
     ui->setupUi(this);
-    checkMailServerDirectory(); // Check MailServer Directory
-    checkMailArchiveFile(); // Check MailArchiveFile
+//    recievedMailFile="recivedMailArchive.xml" ;
+//    sentMailFile= "sentMailArchive.xml" ;
+
+//    ifstream recievedMailFileArchive;
+//    ofstream sentMailFileArchive;
+
+//   // recievedMailFileArchive.open(recievedMailFile,std::ios_base::in);
+//    sentMailFileArchive.open(sentMailFile,std::ios_base::app);
+
+
 }
 
 /**
@@ -94,10 +103,16 @@ void MailServer::readMail(){
  * -Write mail into mailArchive file
  */
 void MailServer::sendMail(){
+    // mail mail; // it will make a new mail object to send
 
-    /**
-     * You must implement this function
-     */
+    //    mail.setFrom(ui->from->text().toStdString());
+    //    mail.setTo(ui->to->text().toStdString());
+    //    mail.setSubject(ui->subject->text().toStdString());
+    //    mail.setBody(ui->composeMail->toPlainText().toStdString());
+
+    //    draftMail.push_back(mail);
+
+
 
 }
 
@@ -127,7 +142,7 @@ void MailServer::checkMailServerDirectory(){
  */
 void MailServer::checkMailArchiveFile(){
 
-    setMailArchiveFileName("mailArchive.txt");
+    //setMailArchiveFileName("mailArchive.txt");
 
     /**
      * You must implement this function
@@ -156,7 +171,7 @@ void MailServer::writeGivenStringOnTheScreen(string newString){
  * -Handle other stuff
  */
 void MailServer::shutdownMailServer(){
-   /**
+    /**
      * You must implement this function
      */
 
@@ -182,13 +197,43 @@ void MailServer::on_pushButton_clicked()
     QString to=ui->to->text();
     QString subject=ui->subject->text();
     QString composeMail=ui->composeMail->toPlainText();
+    mail newMail;
+
+    newMail.setFrom(from.toStdString());
+    newMail.setTo(to.toStdString());
+    newMail.setSubject(subject.toStdString());
+    newMail.setBody(composeMail.toStdString());
+
+    sentMail.push_back(newMail);
+
+    ofstream sendMailFileArchive;
+    sendMailFileArchive.open("sendMail.xml",std::ios_base::app);
+
+    sendMailFileArchive<<"<email>"<<endl<<"\t"
+               <<"<from>"<<newMail.getFrom()<<"</from>"<<endl<<"\t"
+               <<"<to>"<<newMail.getTo()<<"</to>"<<endl<<"\t"
+               <<"<cc>"<<newMail.getCC()<<"</cc>"<<endl<<"\t"
+              <<"<bcc>"<<newMail.getBCC()<<"</bcc>"<<endl<<"\t"
+              <<"<subject>"<<newMail.getSubject()<<"</subject>"<<endl<<"\t"
+              <<"<body>"<<newMail.getBody()<<"</body>"<<endl
+             <<"</email>"<<endl<<endl<<endl;
 
 
-    //For the Test.
-    QMessageBox::information(this,"From",from);
-    QMessageBox::information(this,"To",to);
-    QMessageBox::information(this,"Subject",subject);
-    QMessageBox::information(this,"Compose email",composeMail);
+
+
+//    cout<<"Mail got::::"<<endl
+//       <<"From: "<<newMail.getFrom()<<endl
+//      <<"To:"<<newMail.getTo()<<endl
+//     <<"CC: "<<newMail.getCC()<<endl
+//    <<"Bcc : "<<newMail.getBCC()<<endl
+//    <<"Subject: "<<newMail.getSubject()<<endl
+//    <<"Body:"<<endl<<newMail.getBody()<<endl;
+
+    //    //For the Test.
+    //    QMessageBox::information(this,"From",from);
+    //    QMessageBox::information(this,"To",to);
+    //    QMessageBox::information(this,"Subject",subject);
+    //    QMessageBox::information(this,"Compose email",composeMail);
 
 
     //islem bitince ekrani kapatma.Suanlik kapali kalsin.
