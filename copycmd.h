@@ -4,6 +4,7 @@
 #include <QApplication>
 #include "command.h"
 #include <string>
+#include "gtuvos.h"
 
 // begin of the library about copyFile function
 #include <iostream>
@@ -35,7 +36,7 @@ class CopyCMD : public ICommand
 public:
     ~CopyCMD();
     CopyCMD(QStringList params);
-    void execute();
+    void execute(Ui::MainWindow *window);
     /*
      * Copy the file to the target path
      *

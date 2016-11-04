@@ -11,6 +11,8 @@ SOURCES += main.cpp \
     commandfactory.cpp \
     mail.cpp \
     mailcmd.cpp
+    helpcmd.cpp \
+    exitcmd.cpp
 
 RESOURCES += qml.qrc
 
@@ -29,6 +31,8 @@ HEADERS += \
     commandfactory.h \
     mail.h \
     mailcmd.h
+    helpcmd.h \
+    exitcmd.h
 
 FORMS += \
     mainwindow.ui \

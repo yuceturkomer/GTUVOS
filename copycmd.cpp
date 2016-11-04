@@ -2,6 +2,8 @@
 #include "command.h"
 #include "gtuexceptions.h"
 
+#include "QApplication"
+#include "gtuvos.h"
 CopyCMD::~CopyCMD(){
 }
 
@@ -10,11 +12,11 @@ CopyCMD::CopyCMD(QStringList params):ICommand(params)
     cout<<"CopyCmd constructed!!"<<endl;
 }
 
-void CopyCMD::execute(){
-    cout<<"CopyCMD execute cmd!!"<<endl;
-
+void CopyCMD::execute(Ui::MainWindow *mainWindow){
+    mainWindow->terminalScreen->insertPlainText("CopyCMD execute cmd!!\n");
     if(mParams.size()!=3)
         throw INSUFFICIENT_PARAMS_EXCEPTION();
+
 
     string temp;
     cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
