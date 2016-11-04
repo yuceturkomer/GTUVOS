@@ -32,6 +32,7 @@ GTUVOS::GTUVOS(){
 
 void GTUVOS::prepareSystem(){
     cout<< "GTUVOS prepareSystem started!!"<<endl;
+    // TODO: check os files
 }
 
 /* Function takes a QString type string and splits it according to spaces in it, then returns that
@@ -42,22 +43,16 @@ void GTUVOS::prepareSystem(){
  * @param str the QString type string
  * @return A vector of strings. Each element is parsed and will not include any whitespaces. *
  */
-vector<string> GTUVOS::parseStr(QString str){
+QStringList GTUVOS::parseStr(QString str){
     cout<<endl<<"parseStr is started, param: "<<str.toStdString()<<endl;
 
     QStringList stringlist =str.split(" ");
-    vector<string> parses;
 
-    if(str.size() == 0){
-        parses.push_back("InsufficientNumberOfTokens");
-        return parses;
+    if(stringlist.empty()){
+        stringlist.append("InsufficientNumberOfTokens");
     }
 
-    foreach (QString iter, stringlist) {
-       parses.push_back(iter.toStdString());
-    }
-
-    return parses;
+    return stringlist;
 }
 
 /* This function executes the command if possible and returns true. To decide this it calls the parseStr function and
@@ -69,25 +64,25 @@ vector<string> GTUVOS::parseStr(QString str){
  *
  */
 bool GTUVOS::executeCmd(QString str){
-    vector<string> parses = parseStr(str);// Call of parseStr function.
+    QStringList parses = parseStr(str);// Call of parseStr function.
 
-    foreach (string tempStr, parses) {
-        cout<<tempStr<<endl;
+    foreach (QString itr, parses) {
+        cout<<itr.toStdString()<<endl;
     }
 
-    string command = parses.front();// First element of vector parses. Used for deciding the command.
+    QString command = parses[0];// First element of vector parses. Used for deciding the command.
 
-    if(command == "cp"){
+    if(command.compare("cp")==0){
         cout<<"Command copyfile will be executed."<<endl<<endl;
-    }else if (command == "mail"){
+    }else if (command.compare("mail")==0){
         cout<<"Mailbox window will be opened."<<endl<<endl;
         mailServerUi.show();//mailServer window should be opened.
-    }else if (command == "help" || command == "Help" ){
+    }else if (command.compare("help")==0){
         cout<<"The available commands are:"<<endl
             <<"help"<<endl
             <<"cp <file_1> <file_2>"<<endl
             <<"mail"<<endl<<endl;
-    }else if (command == "exit" || command == "Exit" || command == "quit" || command == "Quit" ){
+    }else if (command.compare("exit")==0){
         cout<<" ~~~~ System shutdown command entered! ~~~~ "<<endl<<endl;
     }else{
         cout<<"There is no such command."<<endl<<endl;

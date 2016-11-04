@@ -178,7 +178,7 @@ private:
      *
      * @param newString will parsed
      */
-    vector<string> parseStr(QString str);
+    QStringList parseStr(QString str);
 };
 
 
