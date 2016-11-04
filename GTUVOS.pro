@@ -6,7 +6,9 @@ CONFIG += c++11
 SOURCES += main.cpp \
     mainwindow.cpp \
     mailserver.cpp \
-    gtuvos.cpp
+    gtuvos.cpp \
+    copycmd.cpp \
+    commandfactory.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,7 +21,10 @@ include(deployment.pri)
 HEADERS += \
     mailserver.h \
     mainwindow.h \
-    gtuvos.h
+    gtuvos.h \
+    command.h \
+    copycmd.h \
+    commandfactory.h
 
 FORMS += \
     mainwindow.ui \

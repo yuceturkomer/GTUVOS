@@ -36,7 +36,7 @@ void MainWindow::on_inputBox_returnPressed()
     QString commandStr = lines.front(); // First element of list. The command should be here.
 
     // Res stands for the result. Gets the return value of executeCmd. ExecuteCmd calls the parse function.
-    bool res = GTUVOS::getInstance()->executeCmd(command);
+    bool res = GTUVOS::getInstance()->executeCMD(command);
 
 
     //QMessageBox::information(this,"baslık",QString::number(lines.count()));
