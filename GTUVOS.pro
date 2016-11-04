@@ -10,9 +10,10 @@ SOURCES += main.cpp \
     copycmd.cpp \
     commandfactory.cpp \
     mail.cpp \
-    mailcmd.cpp
+    mailcmd.cpp \
     helpcmd.cpp \
-    exitcmd.cpp
+    exitcmd.cpp \
+    lscmd.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,9 +31,10 @@ HEADERS += \
     copycmd.h \
     commandfactory.h \
     mail.h \
-    mailcmd.h
+    mailcmd.h \
     helpcmd.h \
-    exitcmd.h
+    exitcmd.h \
+    lscmd.h
 
 FORMS += \
     mainwindow.ui \

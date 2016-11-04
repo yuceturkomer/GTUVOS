@@ -16,7 +16,6 @@
 #include <dirent.h>        // DIR
 // end of the library about copyFile function
 
-
 // begin of the constant variables about copyFile function
 const static int  SUCCESS_STATUS = 0;
 const static int  SUCCESS_COPY_FILE = 0;

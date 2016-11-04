@@ -41,7 +41,7 @@ bool GTUVOS::executeCMD(QString cmdStr){
     ICommand *command=NULL;
     try{
         ICommand *command = CommandFactory::getInstance()->getCommand(cmdStr);
-        command->execute();
+        command->execute(window);
     }catch(exception& e){
         window->terminalScreen->insertPlainText(e.what());
     }

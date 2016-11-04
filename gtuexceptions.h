@@ -22,6 +22,15 @@ public:
       }
 };
 
+class INVALID_COMMAND_EXCEPTION : public exception{
+public:
+    virtual const char* what() const throw()
+      {
+        return "EXCEPTION -> INVALID_COMMAND\n";
+      }
+};
+
+
 
 
 #endif // GTUEXCEPTIONS_H

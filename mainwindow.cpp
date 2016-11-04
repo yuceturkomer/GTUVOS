@@ -13,9 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     ui->terminalScreen->insertPlainText("Welcome to "+name+"\n");
     ui->terminalScreen->insertPlainText("Version "+QString::number(version)+"\n");
     ui->terminalScreen->insertPlainText("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-\n\n");
-    ui->terminalScreen->insertPlainText("The available commands are:\n\n help\n cp <file_1> <file_2>\n mail\n\n");
-    ui->terminalScreen->insertPlainText("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-\n\n");
-
 }
 
 MainWindow::~MainWindow()

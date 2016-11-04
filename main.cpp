@@ -4,7 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-
     QApplication app(argc,argv);
     MainWindow main;
     GTUVOS::getInstance()->window = main.getUI();

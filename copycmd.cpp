@@ -12,14 +12,17 @@ CopyCMD::CopyCMD(QStringList params):ICommand(params)
     cout<<"CopyCmd constructed!!"<<endl;
 }
 
+// TODO :: Hataları istersen exception ile hallet istersende return valueler ile ekrana falan basarsin
 void CopyCMD::execute(Ui::MainWindow *mainWindow){
+
     mainWindow->terminalScreen->insertPlainText("CopyCMD execute cmd!!\n");
+
     if(mParams.size()!=3)
-        throw INSUFFICIENT_PARAMS_EXCEPTION();
-
-
-    string temp;
-    cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
+       mainWindow->terminalScreen->insertPlainText("INSUFFICIENT PARAMETER");
+    else{
+        string temp;
+        cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
+    }
 }
 
 /*
