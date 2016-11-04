@@ -17,5 +17,5 @@ ExitCMD::ExitCMD(QStringList params):ICommand(params)
 }
 
 void ExitCMD::execute(Ui::MainWindow *mainWindow){
-    cout<<"ExitCmd constructed!!"<<endl;
+    QApplication::quit();
 }
