@@ -1,5 +1,7 @@
 #include "commandfactory.h"
 #include "copycmd.h"
+#include "mailcmd.h"
+#include "gtuvos.h"
 #include <QApplication>
 
 CommandFactory *CommandFactory::instance=NULL;
@@ -24,7 +26,7 @@ ICommand* CommandFactory::getCommand(QString str){
         cmd = new CopyCMD(parses);
     }else if (command.compare("mail")==0){
         cout<<"Mailbox window will be opened."<<endl<<endl;
-        //mailServerUi.show();//mailServer window should be opened.
+        cmd = new MailCMD(parses);
     }else if (command.compare("help")==0){
        // cmd = new HelpCMD(parses);
         cout<<"The available commands are:"<<endl
@@ -38,7 +40,6 @@ ICommand* CommandFactory::getCommand(QString str){
 
     return cmd;
 }
-
 
 /* Function takes a QString type string and splits it according to spaces in it, then returns that
  * in a vector form. If the str's size is 0, the "Insufficient Tokens" will be pushed to de vector and returns vector instantly.

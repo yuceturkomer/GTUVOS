@@ -5,6 +5,7 @@
 #include <QVector>
 #include "command.h"
 #include "commandfactory.h"
+#include "mailcmd.h"
 
 
 using namespace std;
@@ -26,7 +27,6 @@ void GTUVOS::prepareSystem(){
 }
 
 
-
 double GTUVOS::getVersion() const{
     return version;
 }
@@ -36,11 +36,16 @@ string GTUVOS::getName() const{
 }
 
 bool GTUVOS::executeCMD(QString cmdStr){
+
     ICommand *command = CommandFactory::getInstance()->getCommand(cmdStr);
 
+   /* if((dynamic_cast<MailCMD*>(command))!=NULL){
+        window = mailServerUi;
+    }*/
     command->execute();
+
+    //window->terminalScreen->insertPlainText("Hello World!");
 
     delete command;
     return true;
 }
-

@@ -25,6 +25,9 @@ public:
     explicit MailServer(QWidget *parent = 0);
     ~MailServer();
 
+   Ui::MailServer* getUI(){
+   return ui;}
+
     /**
     * Run MailServer
     *
@@ -126,6 +129,7 @@ public:
      */
     string getSentMailArchiveFileName() const{return sentMailFile;};
     string getRecievedMailArchiveFileName() const{return recievedMailFile;}
+
 
 
 
