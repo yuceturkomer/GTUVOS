@@ -1,5 +1,6 @@
 #include "copycmd.h"
 #include "command.h"
+#include "gtuexceptions.h"
 
 CopyCMD::~CopyCMD(){
 }
@@ -11,6 +12,10 @@ CopyCMD::CopyCMD(QStringList params):ICommand(params)
 
 void CopyCMD::execute(){
     cout<<"CopyCMD execute cmd!!"<<endl;
+
+    if(mParams.size()!=3)
+        throw INSUFFICIENT_PARAMS_EXCEPTION();
+
     string temp;
     cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
 }

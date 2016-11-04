@@ -36,20 +36,8 @@ void MainWindow::on_inputBox_returnPressed()
     QString commandStr = lines.front(); // First element of list. The command should be here.
 
     // Res stands for the result. Gets the return value of executeCmd. ExecuteCmd calls the parse function.
-    bool res = GTUVOS::getInstance()->executeCMD(command);
-
-    //QMessageBox::information(this,"baslık",QString::number(lines.count()));
-
-    // The > symbol is printed to the terminalScreen
-    // Then if executeCmd is true, it prints command's name and a message about function execution being successful.
-    // Else prints failure message.
     ui->terminalScreen->insertPlainText("> ");
-    if(res){
-        ui->terminalScreen->insertPlainText(commandStr);
-        ui->terminalScreen->insertPlainText(" command successfully recognized!\n");
-    }else{
-        ui->terminalScreen->insertPlainText("Failed to recognize the command, please try again or if you want help, just type help and press enter.\n\n");
-    }
+    GTUVOS::getInstance()->executeCMD(command);
 
     // Scroll down automatically
     ui->terminalScreen->moveCursor(QTextCursor::End);

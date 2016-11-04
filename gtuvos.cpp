@@ -6,6 +6,7 @@
 #include "command.h"
 #include "commandfactory.h"
 #include "mailcmd.h"
+#include "gtuexceptions.h"
 
 
 using namespace std;
@@ -37,15 +38,16 @@ string GTUVOS::getName() const{
 
 bool GTUVOS::executeCMD(QString cmdStr){
 
-    ICommand *command = CommandFactory::getInstance()->getCommand(cmdStr);
+    ICommand *command=NULL;
+    try{
+        ICommand *command = CommandFactory::getInstance()->getCommand(cmdStr);
+        command->execute();
+    }catch(exception& e){
+        window->terminalScreen->insertPlainText(e.what());
+    }
 
-   /* if((dynamic_cast<MailCMD*>(command))!=NULL){
-        window = mailServerUi;
-    }*/
-    command->execute();
+    if(command!=NULL)
+      delete command;
 
-    //window->terminalScreen->insertPlainText("Hello World!");
-
-    delete command;
     return true;
 }

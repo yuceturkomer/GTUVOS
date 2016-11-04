@@ -26,7 +26,8 @@ HEADERS += \
     command.h \
     copycmd.h \
     commandfactory.h \
-    mailcmd.h
+    mailcmd.h \
+    gtuexceptions.h
 
 FORMS += \
     mainwindow.ui \
