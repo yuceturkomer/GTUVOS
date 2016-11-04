@@ -42,7 +42,7 @@ bool GTUVOS::executeCMD(QString cmdStr){
    /* if((dynamic_cast<MailCMD*>(command))!=NULL){
         window = mailServerUi;
     }*/
-    command->execute();
+    command->execute(window);
 
     //window->terminalScreen->insertPlainText("Hello World!");
 

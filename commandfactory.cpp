@@ -1,7 +1,9 @@
 #include "commandfactory.h"
 #include "copycmd.h"
 #include "mailcmd.h"
+#include "helpcmd.h"
 #include "gtuvos.h"
+#include "exitcmd.h"
 #include <QApplication>
 
 CommandFactory *CommandFactory::instance=NULL;
@@ -28,14 +30,9 @@ ICommand* CommandFactory::getCommand(QString str){
         cout<<"Mailbox window will be opened."<<endl<<endl;
         cmd = new MailCMD(parses);
     }else if (command.compare("help")==0){
-       // cmd = new HelpCMD(parses);
-        cout<<"The available commands are:"<<endl
-            <<"help"<<endl
-            <<"cp <file_1> <file_2>"<<endl
-            <<"mail"<<endl<<endl;
+        cmd = new HelpCMD(parses);
     }else if (command.compare("exit")==0){
-        //cmd = new ExitCMD();
-        cout<<" ~~~~ System shutdown command entered! ~~~~ "<<endl<<endl;
+        cmd = new ExitCMD(parses);
     }
 
     return cmd;

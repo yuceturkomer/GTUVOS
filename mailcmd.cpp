@@ -11,8 +11,8 @@ MailCMD::MailCMD(QStringList params):ICommand(params)
 }
 
 
-void MailCMD::execute(){
-   cout<<"MailCMD execute cmd!!"<<endl;
+void MailCMD::execute(Ui::MainWindow *window){
+   window->terminalScreen->insertPlainText("MailCMD execute cmd!!\n");
 }
 
 MailCMD::~MailCMD(){

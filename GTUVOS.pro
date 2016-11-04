@@ -9,7 +9,9 @@ SOURCES += main.cpp \
     gtuvos.cpp \
     copycmd.cpp \
     commandfactory.cpp \
-    mailcmd.cpp
+    mailcmd.cpp \
+    helpcmd.cpp \
+    exitcmd.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,7 +28,9 @@ HEADERS += \
     command.h \
     copycmd.h \
     commandfactory.h \
-    mailcmd.h
+    mailcmd.h \
+    helpcmd.h \
+    exitcmd.h
 
 FORMS += \
     mainwindow.ui \
