@@ -38,7 +38,6 @@ void MainWindow::on_inputBox_returnPressed()
     // Res stands for the result. Gets the return value of executeCmd. ExecuteCmd calls the parse function.
     bool res = GTUVOS::getInstance()->executeCMD(command);
 
-
     //QMessageBox::information(this,"baslık",QString::number(lines.count()));
 
     // The > symbol is printed to the terminalScreen

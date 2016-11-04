@@ -6,9 +6,9 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc,argv);
-    GTUVOS::getInstance();
+    MainWindow main;
+    GTUVOS::getInstance()->window = main.getUI();
 
-    MainWindow m;
-    m.show();
+    main.show();
     return app.exec();
 }

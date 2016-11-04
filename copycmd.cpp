@@ -11,6 +11,8 @@ CopyCMD::CopyCMD(QStringList params):ICommand(params)
 
 void CopyCMD::execute(){
     cout<<"CopyCMD execute cmd!!"<<endl;
+    string temp;
+    cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
 }
 
 /*
@@ -56,6 +58,7 @@ int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyEx
     // If filePath didn't open
     if(source < SUCCESS_STATUS)
         return FILE_PATH_NOT_EXIST_OR_NOT_A_FILE;
+
 
     // Make a file name which will created
     string nameOfFile;
@@ -158,10 +161,11 @@ int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyEx
  */
 bool CopyCMD::isItAFile(string filePath){
 
+    cout<<filePath<<"--"<<filePath.c_str()<<endl;
     FILE *filePtrInputFile = fopen(filePath.c_str(),"r"); // Open File
 
     // If filePath didn't a file name
-    if (!filePtrInputFile)
+    if (filePtrInputFile==NULL)
         return false; // filePath is not a file name
 
     // Close File

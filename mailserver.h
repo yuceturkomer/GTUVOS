@@ -17,6 +17,9 @@ public:
     explicit MailServer(QWidget *parent = 0);
     ~MailServer();
 
+   Ui::MailServer* getUI(){
+   return ui;}
+
     /**
     * Run MailServer
     *
@@ -122,6 +125,7 @@ public:
      * Set mailArchiveFileName
      */
     void setMailArchiveFileName(string newMailArchiveFileName) {mailArchiveFileName = newMailArchiveFileName ;}
+
 
 
 private slots:
