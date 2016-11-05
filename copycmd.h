@@ -1,22 +1,41 @@
+/**
+ * Virtual Operating System Copy File Command
+ *
+ * File:   copycmd.h
+ *
+ * Description:
+ *
+ * Copy the file to the target path
+ *
+ *
+ * @author CSE_343_Software Engineering_Group_2
+ * @since Monday 10 October 2016
+ */
+
 #ifndef COPYCMD_H
 #define COPYCMD_H
 
-#include <QApplication>
-#include "command.h"
-#include <string>
-#include "gtuvos.h"
-
-// begin of the library about copyFile function
-#include <iostream>
+/**
+ * Begin of the library about CopyCMD Class
+ */
+#include <QApplication>    // Qt
+#include "command.h"       // command header
+#include <string>          // string
+#include "gtuvos.h"        // gtuvos header
+#include <iostream>        // cpp iostream
 #include <sys/sendfile.h>  // sendfile
 #include <fcntl.h>         // open
 #include <unistd.h>        // close
 #include <sys/stat.h>      // fstat
 #include <sys/types.h>     // fstat
 #include <dirent.h>        // DIR
-// end of the library about copyFile function
+/**
+ * End of the library about CopyCMD Class
+ */
 
-// begin of the constant variables about copyFile function
+/**
+ * Begin of the constant variables about CopyCMD Class
+*/
 const static int  SUCCESS_STATUS = 0;
 const static int  SUCCESS_COPY_FILE = 0;
 const static int  IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING = 1;
@@ -26,17 +45,39 @@ const static int  FAIL_COPY_FILE = -1;
 const static int  FILE_PATH_NOT_EXIST_OR_NOT_A_FILE = -2;
 const static int  TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY = -3;
 const static int  CREATED_FILE_DELETED_DURING_COPY_PROCESS = -4;
-// end of the constant variables about copyFile function
+const static int  LOCATION_OF_SOURCE_PATH_IN_STRING = 1;
+const static int  LOCATION_OF_TARGET_PATH_IN_STRING = 2;
+/**
+ * End of the constant variables about CopyCMD Class
+ */
+
 
 using namespace  std;
 
 class CopyCMD : public ICommand
 {
 public:
-    ~CopyCMD();
+
+    /**
+     * One  Parameter Constructor
+     *
+     * @param params have source file path and target path
+     */
     CopyCMD(QStringList params);
+
+    /**
+     * Virtual Constructors
+     */
+    virtual ~CopyCMD();
+
+    /**
+     * Execute To Command
+     *
+     * @param window is used to give information to the user
+     */
     void execute(Ui::MainWindow *window);
-    /*
+
+    /**
      * Copy the file to the target path
      *
      * SUCCESSFUL CASES:
@@ -65,7 +106,7 @@ public:
      */
     int copyFile(string filePath, string targetPath, int ifTheFileAlreadyExists, string* theNameOfTheCopyFileCreated);
 
-    /*
+    /**
      * Is given file path a file name
      *
      * @param filePath will checked.
@@ -73,7 +114,7 @@ public:
      */
     bool isItAFile(string filePath);
 
-    /*
+    /**
      * Is given directory path a directory name
      *
      * @param dirPath will checked.
@@ -81,7 +122,7 @@ public:
      */
     bool isItADirectory(string dirPath);
 
-    /*
+    /**
      * Find The File Name In Given Path
      *
      * @param filePath need for search
@@ -89,7 +130,7 @@ public:
      */
     void findTheFileNameInGivenPath(string filePath, string* theNameOfTheFileToBeCopied);
 
-    /*
+    /**
      * Merge The Given Path And Given File Name
      *
      * @param Path is beginning of the newPath
@@ -98,7 +139,7 @@ public:
      */
     void mergethePathAndFileName(string Path, string fileName, string* newPath);
 
-    /*
+    /**
      * Copy From Source File To Destination File
      *
      * @param sourceFile is source file for copy process
@@ -107,7 +148,7 @@ public:
      */
     bool copyFromSourceFileToDestinationFile(int sourceFile, int destinationFile);
 
-    /*
+    /**
      * Find The Unique Name In The Path
      *
      * @param filePath is source path for finding process
