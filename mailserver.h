@@ -131,7 +131,7 @@ public:
     string getRecievedMailArchiveFileName() const{return recievedMailFile;}
 
 
-
+    void addDraft(mail newMail){ draftMail.push_back(newMail);};
 
 
 
