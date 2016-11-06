@@ -8,14 +8,14 @@
 
 using namespace std;
 
-class mail
+class Mail
 {
 public:
-    mail();
-    mail(string From, string To);
-    mail(string From, string To, string Body);
-    mail(string From, string To, string Subject ,string Body);
-    mail(string From, string To, string CC , string BCC , string Subject , string Body);
+    Mail();
+    Mail(string From, string To);
+    Mail(string From, string To, string Body);
+    Mail(string From, string To, string Subject ,string Body);
+    Mail(string From, string To, string CC , string BCC , string Subject , string Body);
 
     string getFrom();
     string getTo();

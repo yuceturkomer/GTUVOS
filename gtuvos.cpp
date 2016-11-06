@@ -51,3 +51,7 @@ bool GTUVOS::executeCMD(QString cmdStr){
 
     return true;
 }
+
+MailServer& GTUVOS::getMailServer(){
+    return mailServer;
+}

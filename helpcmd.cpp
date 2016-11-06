@@ -22,7 +22,8 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
     mainWindow->terminalScreen->insertPlainText("The available commands are:\n"
                                                 "help\n"
                                                 "cp <file_1> <file_2>\n"
-                                                "mail\n"
+                                                "mail list\n"
+                                                "mail send to title subject\n"
                                                 "ls");
 
 

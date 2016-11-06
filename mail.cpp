@@ -1,6 +1,6 @@
 #include "mail.h"
 
-mail::mail()
+Mail::Mail()
 {
     setFrom("");
     setTo("");
@@ -11,7 +11,7 @@ mail::mail()
 
 }
 
-mail::mail(string From, string To){
+Mail::Mail(string From, string To){
     setFrom(From);
     setTo(To);
     setCC("");
@@ -20,7 +20,7 @@ mail::mail(string From, string To){
     setBody("");
 }
 
-mail::mail(string From, string To, string Body){
+Mail::Mail(string From, string To, string Body){
     setFrom(From);
     setTo(To);
     setCC("");
@@ -30,7 +30,7 @@ mail::mail(string From, string To, string Body){
 
 }
 
-mail::mail(string From, string To, string Subject, string Body){
+Mail::Mail(string From, string To, string Subject, string Body){
     setFrom(From);
     setTo(To);
     setCC("");
@@ -39,7 +39,7 @@ mail::mail(string From, string To, string Subject, string Body){
     setBody(Body);
 }
 
-mail::mail(string From, string To, string CC, string BCC, string Subject, string Body){
+Mail::Mail(string From, string To, string CC, string BCC, string Subject, string Body){
 
     setFrom(From);
     setTo(To);
@@ -49,50 +49,50 @@ mail::mail(string From, string To, string CC, string BCC, string Subject, string
     setBody(Body);
 }
 
-string mail::getFrom(){
+string Mail::getFrom(){
     return from;
 }
 
-string mail::getTo(){
+string Mail::getTo(){
     return to;
 }
 
-string mail::getCC(){
+string Mail::getCC(){
     return cc;
 }
 
-string mail::getBCC(){
+string Mail::getBCC(){
     return bcc;
 }
 
-string mail::getSubject(){
+string Mail::getSubject(){
     return subject;
 }
 
-string mail::getBody(){
+string Mail::getBody(){
     return body;
 }
 
-void mail::setFrom(string From){
+void Mail::setFrom(string From){
     from=From;
 }
 
-void mail::setTo(string To){
+void Mail::setTo(string To){
     to=To;
 }
 
-void mail::setCC(string CC){
+void Mail::setCC(string CC){
     cc=CC;
 }
-void mail::setBCC(string BCC){
+void Mail::setBCC(string BCC){
     bcc=BCC;
 }
 
-void mail::setSubject(string Subject){
+void Mail::setSubject(string Subject){
     subject=Subject;
 }
 
-void mail::setBody(string Body){
+void Mail::setBody(string Body){
     body=Body;
 }
 

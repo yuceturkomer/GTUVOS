@@ -5,6 +5,7 @@
 #include <string>
 #include <QApplication>
 #include "mainwindow.h"
+#include "mailserver.h"
 
 using std::vector;
 using std::string;
@@ -25,6 +26,7 @@ public:
 
     double getVersion() const; // get system version number
     string getName() const; // get system name
+    MailServer& getMailServer();
 
     /*
      * Check the our source directory
@@ -43,6 +45,8 @@ private:
     string name;
     double version;
     static GTUVOS *instance;
+    MailServer mailServer;
+
 };
 
 

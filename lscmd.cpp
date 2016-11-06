@@ -17,7 +17,6 @@
 #include <unistd.h>
 
 ListCMD::~ListCMD(){
-
 }
 
 ListCMD::ListCMD(QStringList params):ICommand(params)
@@ -25,57 +24,39 @@ ListCMD::ListCMD(QStringList params):ICommand(params)
     cout<<"Listcommand consturcted"<<endl;
 }
 void ListCMD::execute(Ui::MainWindow* window){
-    window->terminalScreen->insertPlainText("ListCMD execute cmd\n");
-    traversepath(window);
+    if(mParams.size()==1){
+        char path[255];
+        getcwd(path,255);
+        window->terminalScreen->insertPlainText("Path: "+QString::fromUtf8(path)+"\n");
+        traversepath(window,path);
+    }else{
+        window->terminalScreen->insertPlainText("Path: "+mParams[1]+"\n");
+        traversepath(window,mParams[1].toStdString().c_str());
+    }
 }
 
 
-void ListCMD::traversepath(Ui::MainWindow* window)
+void ListCMD::traversepath(Ui::MainWindow* window,const char* path)
 {
-    char directory[1024];
-    getcwd(directory, sizeof(directory));
     struct dirent *direntp;
     DIR *dirp;
 
-    if ((dirp = opendir(directory)) == NULL) { /* Dosya acilamazsa */
-        perror ("Failed to open directory");
-        //return -1;
+    if ((dirp = opendir(path)) == NULL) { /* Dosya acilamazsa */
+        window->terminalScreen->insertPlainText("Failed to open directory");
+        return;
     }
 
-    /* Eger dosyanin icinde baska dosya yoksa */
-    if(getNumberOfSubDirectory(directory) == 0) {
-        /* Dosyanin icindekileri konsola yazdirir. */
-        while ((direntp = readdir(dirp)) != NULL) {
-            if(direntp->d_type == DT_REG)
-                if(strcmp(direntp->d_name , ".." )!=0){
-                    window->terminalScreen->insertPlainText(direntp->d_name);
-                    window->terminalScreen->insertPlainText("\n");
-                }
-
+    /* Dosyanin icindekileri konsola yazdirir. */
+    while ((direntp = readdir(dirp)) != NULL) {
+        QString str="";
+        if(strcmp(direntp->d_name , "..")!=0 && strcmp(direntp->d_name , ".")!=0){
+            if(direntp->d_type==DT_DIR)
+                str.append("Dir->");
+            str.append(direntp->d_name).append("\n");
         }
+        window->terminalScreen->insertPlainText(str);
     }
 
     /* Dosya kapatilir. */
     while ((closedir(dirp) == -1) && (errno == EINTR)) ;
-}
-
-int ListCMD::getNumberOfSubDirectory(char *directory)
-{
-    DIR * currentDirectory = NULL;
-    struct dirent *myDirectory = NULL;
-
-    int numOfSubDirectory=0;
-
-    currentDirectory = opendir(directory); /* Dosya acilir. */
-
-    while((myDirectory = readdir(currentDirectory)) != NULL)
-    {
-       if(myDirectory->d_type == DT_DIR && strcmp(myDirectory->d_name , ".") &&
-          strcmp( myDirectory->d_name , ".." ) )
-            numOfSubDirectory++;
-    }
-
-    closedir(currentDirectory); /* Dosya kapatilir. */
-
-    return numOfSubDirectory;
 }
