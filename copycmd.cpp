@@ -1,21 +1,107 @@
-#include "copycmd.h"
-#include "command.h"
+/**
+ * Virtual Operating System Copy File Command
+ *
+ * File:   copycmd.cpp
+ *
+ * Description:
+ *
+ * Copy the file to the target path
+ *
+ *
+ * @author CSE_343_Software Engineering_Group_2
+ * @since Monday 10 October 2016
+ */
 
-CopyCMD::~CopyCMD(){
-}
+/**
+ * Begin of the library about CopyCMD Class
+ */
+#include "copycmd.h"           // Compcmd header
+#include "command.h"           // Command header
+#include "gtuexceptions.h"     // GtuExceptions header
+#include "QApplication"        // Qt
+#include "gtuvos.h"            // Gtuvos header
+/**
+ * End of the library about CopyCMD Class
+ */
 
+/**
+ * One  Parameter Constructor
+ *
+ * @param params have source file path and target path
+ */
 CopyCMD::CopyCMD(QStringList params):ICommand(params)
 {
     cout<<"CopyCmd constructed!!"<<endl;
 }
 
-void CopyCMD::execute(){
-    cout<<"CopyCMD execute cmd!!"<<endl;
-    string temp;
-    cout<<"Result:"<<copyFile(mParams[1].toStdString(),mParams[2].toStdString(),0,&temp)<<endl;
+/**
+ * Virtual Constructors
+ */
+CopyCMD::~CopyCMD(){
 }
 
-/*
+/**
+ * Execute To Command
+ *
+ * @param window is used to give information to the user
+ */
+void CopyCMD::execute(Ui::MainWindow *mainWindow){
+
+    // Information for running the command
+    mainWindow->terminalScreen->insertPlainText("CopyCMD execute cmd\n\n");
+
+    // Check the parameter size
+    if(mParams.size()!=3) // If parameter size (not include 'cp' command word) not equal 2, then print the error message.
+       mainWindow->terminalScreen->insertPlainText("You must give 2 parameter for copy file command.");
+    else{
+
+        string theNameOfTheCopyFileCreated; // The name of the copy file created
+        int resultOfCopyFile;               // Result of copyFile function
+
+        // Call the copyFile function
+        resultOfCopyFile = copyFile(mParams[LOCATION_OF_SOURCE_PATH_IN_STRING].toStdString(),mParams[LOCATION_OF_TARGET_PATH_IN_STRING].toStdString(),IF_THE_FILE_ALREADY_EXISTS_OVERWRITE,&theNameOfTheCopyFileCreated);
+
+        // If the file copy was successful.
+        if(resultOfCopyFile == SUCCESS_COPY_FILE){
+
+            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);           // Create QString for print
+            mainWindow->terminalScreen->insertPlainText("File copy was successful. Name of the copy file created: " );  // Print message
+            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                            // Print the name of the copy file created
+
+        }
+        // If the file already exists overwrite
+        else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_OVERWRITE)
+        {
+            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);                                      // Create QString for print
+            mainWindow->terminalScreen->insertPlainText("File copy and overwrite the existing file successful. Name of the copy file created: " ); // Print message
+            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                                                       // Print the name of the copy file created
+
+        }
+        // If the file copy was unsuccessful.
+        else if (resultOfCopyFile == FAIL_COPY_FILE)
+        {
+            mainWindow->terminalScreen->insertPlainText("File copy was unsuccessful." );  // Print error message
+        }
+        // If path not exist or not a file
+        else if (resultOfCopyFile == FILE_PATH_NOT_EXIST_OR_NOT_A_FILE)
+        {
+            mainWindow->terminalScreen->insertPlainText("FilePath is not exist or is not a file name." );  // Print error message
+        }
+        // If target path not exist or not a directory
+        else if (resultOfCopyFile == TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY)
+        {
+            mainWindow->terminalScreen->insertPlainText("TargetPath is not exist or is not a directory name." );  // Print error message
+        }
+        // If created file deleted during copy process
+        else if (resultOfCopyFile == CREATED_FILE_DELETED_DURING_COPY_PROCESS)
+        {
+            mainWindow->terminalScreen->insertPlainText("The created file was deleted during the process." );  // Print error message
+        }
+
+    }
+}
+
+/**
  * Copy the file to the target path
  *
  * SUCCESSFUL CASES:
@@ -153,7 +239,7 @@ int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyEx
     return SUCCESS_COPY_FILE;
 }
 
-/*
+/**
  * Is given file path a file name
  *
  * @param filePath will checked.
@@ -174,7 +260,7 @@ bool CopyCMD::isItAFile(string filePath){
     return true;// filePath is a file name
 }
 
-/*
+/**
  * Is given directory path a directory name
  *
  * @param dirPath will checked.
@@ -194,7 +280,7 @@ bool CopyCMD::isItADirectory(string dirPath){
     return true;// dirPath is a directory name
 }
 
-/*
+/**
  * Find The File Name In Given Path
  *
  * @param filePath need for search
@@ -214,7 +300,7 @@ void CopyCMD::findTheFileNameInGivenPath(string filePath, string* theNameOfTheFi
 
 }
 
-/*
+/**
  * Merge The Given Path And Given File Name
  *
  * @param Path is beginning of the newPath
@@ -238,7 +324,7 @@ void CopyCMD::mergethePathAndFileName(string Path, string fileName, string* newP
 
 }
 
-/*
+/**
  * Copy From Source File To Destination File
  *
  * @param sourceFile is source file for copy process
@@ -263,7 +349,7 @@ bool CopyCMD::copyFromSourceFileToDestinationFile(int sourceFile, int destinatio
     return true;
 }
 
-/*
+/**
  * Find The Unique Name In The Path
  *
  * @param filePath is source path for finding process

@@ -1,7 +1,11 @@
 #include "commandfactory.h"
+#include "gtuexceptions.h"
 #include "copycmd.h"
 #include "mailcmd.h"
+#include "helpcmd.h"
 #include "gtuvos.h"
+#include "exitcmd.h"
+#include "lscmd.h"
 #include <QApplication>
 
 CommandFactory *CommandFactory::instance=NULL;
@@ -22,21 +26,16 @@ ICommand* CommandFactory::getCommand(QString str){
     QString command = parses[0];// First element of vector parses. Used for deciding the command.
 
     if(command.compare("cp")==0){
-        cout<<"Command copyfile will be executed."<<endl<<endl;
         cmd = new CopyCMD(parses);
     }else if (command.compare("mail")==0){
-        cout<<"Mailbox window will be opened."<<endl<<endl;
         cmd = new MailCMD(parses);
     }else if (command.compare("help")==0){
-       // cmd = new HelpCMD(parses);
-        cout<<"The available commands are:"<<endl
-            <<"help"<<endl
-            <<"cp <file_1> <file_2>"<<endl
-            <<"mail"<<endl<<endl;
+        cmd = new HelpCMD(parses);
     }else if (command.compare("exit")==0){
-        //cmd = new ExitCMD();
-        cout<<" ~~~~ System shutdown command entered! ~~~~ "<<endl<<endl;
-    }
+        cmd = new ExitCMD(parses);
+    }else if(command.compare("ls")==0){
+        cmd = new ListCMD(parses);
+    }else throw INVALID_COMMAND_EXCEPTION();
 
     return cmd;
 }
