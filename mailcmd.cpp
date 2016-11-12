@@ -34,9 +34,9 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        Mail newMail;
 
-       newMail.setTo(mParams[1].toStdString());
-       newMail.setSubject(mParams[2].toStdString());
-       newMail.setBody(mParams[3].toStdString());
+       newMail.setTo(mParams[2].toStdString());
+       newMail.setSubject(mParams[3].toStdString());
+       newMail.setBody(mParams[4].toStdString());
 
        GTUVOS::getInstance()->getMailServer().sendMail(newMail);
    }else if(mParams[1].compare("list")==0){
