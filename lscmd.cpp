@@ -27,10 +27,10 @@ void ListCMD::execute(Ui::MainWindow* window){
     if(mParams.size()==1){
         char path[255];
         getcwd(path,255);
-        window->terminalScreen->insertPlainText("Path: "+QString::fromUtf8(path)+"\n");
+        printTerm(window,"Path: "+QString::fromUtf8(path));
         traversepath(window,path);
     }else{
-        window->terminalScreen->insertPlainText("Path: "+mParams[1]+"\n");
+        printTerm(window,"Path: "+mParams[1]);
         traversepath(window,mParams[1].toStdString().c_str());
     }
 }
@@ -40,9 +40,10 @@ void ListCMD::traversepath(Ui::MainWindow* window,const char* path)
 {
     struct dirent *direntp;
     DIR *dirp;
+    int total=0;
 
     if ((dirp = opendir(path)) == NULL) { /* Dosya acilamazsa */
-        window->terminalScreen->insertPlainText("Failed to open directory");
+        printTerm(window,"Failed to open directory","red");
         return;
     }
 
@@ -50,13 +51,26 @@ void ListCMD::traversepath(Ui::MainWindow* window,const char* path)
     while ((direntp = readdir(dirp)) != NULL) {
         QString str="";
         if(strcmp(direntp->d_name , "..")!=0 && strcmp(direntp->d_name , ".")!=0){
-            if(direntp->d_type==DT_DIR)
+            if(direntp->d_type==DT_DIR){
                 str.append("Dir->");
-            str.append(direntp->d_name).append("\n");
+                str.append(direntp->d_name).append("\n");
+                printTerm(window,str,"green");
+            }else{
+                str.append(direntp->d_name).append("\n");
+                printTerm(window,str,"blue");
+            }
+            ++total;
         }
-        window->terminalScreen->insertPlainText(str);
     }
+    QString totalNum ="Total: ";
+    totalNum.append(QString::number(total));
+    printTerm(window,totalNum,"red");
 
     /* Dosya kapatilir. */
     while ((closedir(dirp) == -1) && (errno == EINTR)) ;
+}
+void ListCMD::printTerm(Ui::MainWindow* window,QString str,QString color){
+    QString text = "";
+    text.append("<span style=\"color:").append(color).append(";\">").append(str).append("</span><br>");
+    window->terminalScreen->insertHtml(text);
 }

@@ -28,7 +28,8 @@ ICommand* CommandFactory::getCommand(QString str){
     if(command.compare("cp")==0){
         cmd = new CopyCMD(parses);
     }else if (command.compare("mail")==0){
-        cmd = new MailCMD(parses);
+        QStringList mailParses =parseMailCMD(str);
+        cmd = new MailCMD(mailParses);
     }else if (command.compare("help")==0){
         cmd = new HelpCMD(parses);
     }else if (command.compare("exit")==0){
@@ -70,3 +71,21 @@ QStringList CommandFactory::parseStr(QString str){
  * @return If it's an available command returns true, else returns false.
  *
  */
+
+QStringList CommandFactory::parseMailCMD(QString str){
+    cout<<"LOG:parseMailCMD is started!"<<endl;
+
+    QRegExp rx("\"w+\"");
+    rx.indexIn(str);
+    QString s = rx.cap(0);
+
+    cout<<s.toStdString();
+
+
+    QStringList tokens = str.split("\"",QString::SkipEmptyParts);
+    foreach (QString itr, tokens) {
+       cout<<"Token: "<<itr.toStdString()<<endl;
+    }
+
+    return tokens;
+}
