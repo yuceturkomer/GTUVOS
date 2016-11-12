@@ -69,8 +69,3 @@ void ListCMD::traversepath(Ui::MainWindow* window,const char* path)
     /* Dosya kapatilir. */
     while ((closedir(dirp) == -1) && (errno == EINTR)) ;
 }
-void ListCMD::printTerm(Ui::MainWindow* window,QString str,QString color){
-    QString text = "";
-    text.append("<span style=\"color:").append(color).append(";\">").append(str).append("</span><br>");
-    window->terminalScreen->insertHtml(text);
-}

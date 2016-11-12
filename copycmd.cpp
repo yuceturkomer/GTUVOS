@@ -47,14 +47,10 @@ CopyCMD::~CopyCMD(){
  */
 void CopyCMD::execute(Ui::MainWindow *mainWindow){
 
-    // Information for running the command
-    mainWindow->terminalScreen->insertPlainText("CopyCMD execute cmd\n\n");
-
     // Check the parameter size
     if(mParams.size()!=3) // If parameter size (not include 'cp' command word) not equal 2, then print the error message.
-       mainWindow->terminalScreen->insertPlainText("You must give 2 parameter for copy file command.");
+       printTerm(mainWindow,"You must give 2 parameter for copy file command.","red");
     else{
-
         string theNameOfTheCopyFileCreated; // The name of the copy file created
         int resultOfCopyFile;               // Result of copyFile function
 
@@ -63,41 +59,35 @@ void CopyCMD::execute(Ui::MainWindow *mainWindow){
 
         // If the file copy was successful.
         if(resultOfCopyFile == SUCCESS_COPY_FILE){
-
-            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);           // Create QString for print
-            mainWindow->terminalScreen->insertPlainText("File copy was successful. Name of the copy file created: " );  // Print message
-            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                            // Print the name of the copy file created
-
+            printTerm(mainWindow,"File copy was successful. Name of the copy file created: "+
+                      QString::fromStdString(theNameOfTheCopyFileCreated),"green");  // Print message
         }
         // If the file already exists overwrite
         else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_OVERWRITE)
         {
-            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);                                      // Create QString for print
-            mainWindow->terminalScreen->insertPlainText("File copy and overwrite the existing file successful. Name of the copy file created: " ); // Print message
-            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                                                       // Print the name of the copy file created
-
+            printTerm(mainWindow,"File copy and overwrite the existing file successful. Name of the copy file created: "+
+                             QString::fromStdString(theNameOfTheCopyFileCreated),"green"); // Print the name of the copy file created
         }
         // If the file copy was unsuccessful.
         else if (resultOfCopyFile == FAIL_COPY_FILE)
         {
-            mainWindow->terminalScreen->insertPlainText("File copy was unsuccessful." );  // Print error message
+            printTerm(mainWindow,"File copy was unsuccessful.","red");  // Print error message
         }
         // If path not exist or not a file
         else if (resultOfCopyFile == FILE_PATH_NOT_EXIST_OR_NOT_A_FILE)
         {
-            mainWindow->terminalScreen->insertPlainText("FilePath is not exist or is not a file name." );  // Print error message
+            printTerm(mainWindow,"FilePath is not exist or is not a file name.","red");  // Print error message
         }
         // If target path not exist or not a directory
         else if (resultOfCopyFile == TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY)
         {
-            mainWindow->terminalScreen->insertPlainText("TargetPath is not exist or is not a directory name." );  // Print error message
+            printTerm(mainWindow,"TargetPath is not exist or is not a directory name.","red");  // Print error message
         }
         // If created file deleted during copy process
         else if (resultOfCopyFile == CREATED_FILE_DELETED_DURING_COPY_PROCESS)
         {
-            mainWindow->terminalScreen->insertPlainText("The created file was deleted during the process." );  // Print error message
+            printTerm(mainWindow,"The created file was deleted during the process.","red");  // Print error message
         }
-
     }
 }
 

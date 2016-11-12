@@ -22,7 +22,6 @@ public:
     ListCMD(QStringList params);
     void execute(Ui::MainWindow *mainWindow);
 private:
-    void printTerm(Ui::MainWindow* window,QString str,QString color="black");
     void traversepath(Ui::MainWindow* window,const char* path);
 
 };
