@@ -16,7 +16,7 @@ MailCMD::MailCMD(QStringList params):ICommand(params)
 void MailCMD::execute(Ui::MainWindow *window){
 
    if(mParams.size()<2){
-       ICommand::printTerm(window,"Please type an mail operation send/list","red");
+       ICommand::printTerm(window,"Please type a mail operation send/list","red");
        return;
    }
 
@@ -40,7 +40,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        GTUVOS::getInstance()->getMailServer().sendMail(newMail);
 
-       QString msg="Mail was sent to: ";
+       QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"green");
 
@@ -48,7 +48,7 @@ void MailCMD::execute(Ui::MainWindow *window){
        vector<Mail> mails = GTUVOS::getInstance()->getMailServer().getAllMails();
 
        if(mails.size()==0){
-           ICommand::printTerm(window,"There is no mail!\nTo sent mail use mail send command","blue");
+           ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","blue");
        }
 
        for(unsigned int i=0;i!=mails.size();++i){

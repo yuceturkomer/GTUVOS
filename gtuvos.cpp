@@ -15,7 +15,7 @@ GTUVOS *GTUVOS::instance= NULL;
 
 GTUVOS::GTUVOS(){
     name = "GTU Virtual OS";
-    version = 0.1;
+    version = 1.3;
 
     prepareSystem();
 

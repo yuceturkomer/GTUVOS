@@ -17,14 +17,11 @@ HelpCMD::HelpCMD(QStringList params):ICommand(params)
 
 void HelpCMD::execute(Ui::MainWindow *mainWindow){
     // Information for running the command
-    printTerm(mainWindow,"--- Help Manual ---","blue");
-
-    printTerm(mainWindow,"The available commands are:<br>"
-                                                "help<br>"
-                                                "cp <file_1> <file_2><br>"
-                                                "mail list<br>"
-                                                "mail send to title subject<br>"
-                                                "ls path?");
-
-
+    printTerm(mainWindow,"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Help Manual ---","purple");
+    printTerm(mainWindow,"&nbsp;&nbsp;&nbsp;The available commands are:<br>","purple");
+    printTerm(mainWindow,"&nbsp;-&nbsp;&nbsp;help<br>"
+                         "&nbsp;-&nbsp;&nbsp;cp &nbsp;&nbsp;&nbsp;file_source &nbsp;&nbsp;&nbsp;file_destination<br>"
+                         "&nbsp;-&nbsp;&nbsp;mail&nbsp;&nbsp;list<br>"
+                         "&nbsp;-&nbsp;&nbsp;mail&nbsp; \"send\" &nbsp;&nbsp; \"to\"&nbsp;&nbsp;&nbsp; \"title\"&nbsp;&nbsp;&nbsp;\"subject\"<br>"
+                         "&nbsp;-&nbsp;&nbsp;ls&nbsp;&nbsp;&nbsp;path (path is optional)","blue");
 }
