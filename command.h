@@ -10,7 +10,7 @@ public :
     }
     virtual void execute(Ui::MainWindow *window)=0;
     virtual ~ICommand(){}
-    inline void printTerm(Ui::MainWindow* window,QString str,QString color="black"){
+    static inline void printTerm(Ui::MainWindow* window,QString str,QString color="black"){
             QString text = "";
             text.append("<span style=\"color:").append(color).append(";\">").append(str).append("</span><br>");
             window->terminalScreen->insertHtml(text);

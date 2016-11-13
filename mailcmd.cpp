@@ -16,21 +16,21 @@ MailCMD::MailCMD(QStringList params):ICommand(params)
 void MailCMD::execute(Ui::MainWindow *window){
 
    if(mParams.size()<2){
-       window->terminalScreen->insertPlainText("Please and an mail operation send/list");
+       ICommand::printTerm(window,"Please type an mail operation send/list","red");
        return;
    }
 
    if(mParams[1].compare("send")==0){
        if(mParams.size() <5){
-           window->terminalScreen->insertPlainText("Mail send invalid parameters");
+           ICommand::printTerm(window,"Mail send invalid parameters","red");
            return;
        }
-       QString log="MAIL->\n";
-       log.append("\tTO: ").append(mParams[2]).append("\n");
-       log.append("\tTITTLE: ").append(mParams[3]).append("\n");
-       log.append("\tMAIL: ").append(mParams[4]).append("\n");
 
-       window->terminalScreen->insertPlainText(log);
+//       QString log="";
+//       log.append("\tTO: ").append(mParams[2]).append("\n");
+//       log.append("\tTITTLE: ").append(mParams[3]).append("\n");
+//       log.append("\tMAIL: ").append(mParams[4]).append("\n");
+//       cout<<"MailSent log:"<<log<<endl;
 
        Mail newMail;
 
@@ -39,23 +39,28 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setBody(mParams[4].toStdString());
 
        GTUVOS::getInstance()->getMailServer().sendMail(newMail);
+
+       QString msg="Mail was sent to: ";
+       msg.append(QString::fromStdString(newMail.getTo()));
+       ICommand::printTerm(window,msg,"green");
+
    }else if(mParams[1].compare("list")==0){
        vector<Mail> mails = GTUVOS::getInstance()->getMailServer().getAllMails();
 
        if(mails.size()==0){
-           window->terminalScreen->insertPlainText("There is no mail!\nTo sent mail use mail send command");
+           ICommand::printTerm(window,"There is no mail!\nTo sent mail use mail send command","blue");
        }
 
        for(unsigned int i=0;i!=mails.size();++i){
            QString mail="";
-           mail.append(QString::number(i)).append(". Mail->\n");
-           mail.append("TO: ").append(QString::fromStdString(mails[i].getTo())).append("\n");
-           mail.append("TITLE: ").append(QString::fromStdString(mails[i].getSubject())).append("\n");
-           mail.append("MESSAGE: ").append(QString::fromStdString(mails[i].getBody())).append("\n");
-           window->terminalScreen->insertPlainText(mail);
+           mail.append(QString::number(i)).append(". Mail:<br>");
+           mail.append("TO: ").append(QString::fromStdString(mails[i].getTo())).append("<br>");
+           mail.append("TITLE: ").append(QString::fromStdString(mails[i].getSubject())).append("<br>");
+           mail.append("MESSAGE: ").append(QString::fromStdString(mails[i].getBody())).append("<br>");
+           ICommand::printTerm(window,mail);
        }
    }else{
-       window->terminalScreen->insertPlainText("Invalid mail action. Please use help manual");
+       ICommand::printTerm(window,"Invalid mail action. Please use help manual","red");
    }
 /*
    ofstream sendMailFileArchive;

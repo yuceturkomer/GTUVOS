@@ -34,7 +34,8 @@ HEADERS += \
     mailcmd.h \
     helpcmd.h \
     exitcmd.h \
-    lscmd.h
+    lscmd.h \
+    gtuexceptions.h
 
 FORMS += \
     mainwindow.ui \

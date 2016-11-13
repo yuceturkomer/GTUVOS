@@ -73,19 +73,19 @@ QStringList CommandFactory::parseStr(QString str){
  */
 
 QStringList CommandFactory::parseMailCMD(QString str){
-    cout<<"LOG:parseMailCMD is started!"<<endl;
+    cout<<"CommandFactory::parseMailCMD, str:"<<str.toStdString()<<endl;
 
-    QRegExp rx("\"w+\"");
-    rx.indexIn(str);
-    QString s = rx.cap(0);
-
-    cout<<s.toStdString();
-
-
-    QStringList tokens = str.split("\"",QString::SkipEmptyParts);
+    // mail send "to to to" "tit le le le" "sub sub sub sub"
+    QStringList mailTkn = str.split("\"",QString::SkipEmptyParts);
+    QString cmd = mailTkn[0];
+    QStringList tokens = cmd.split(" ",QString::SkipEmptyParts);
+    if(mailTkn.size()==6){
+        tokens.append(mailTkn[1]);
+        tokens.append(mailTkn[3]);
+        tokens.append(mailTkn[5]);
+    }
     foreach (QString itr, tokens) {
        cout<<"Token: "<<itr.toStdString()<<endl;
     }
-
     return tokens;
 }

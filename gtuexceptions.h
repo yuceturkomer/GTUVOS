@@ -26,7 +26,7 @@ class INVALID_COMMAND_EXCEPTION : public exception{
 public:
     virtual const char* what() const throw()
       {
-        return "EXCEPTION -> INVALID_COMMAND\n";
+        return "Invalid Command. Please look help manual. -> help\n";
       }
 };
 
