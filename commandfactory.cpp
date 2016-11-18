@@ -1,11 +1,5 @@
 #include "commandfactory.h"
-#include "gtuexceptions.h"
-#include "copycmd.h"
-#include "mailcmd.h"
-#include "helpcmd.h"
-#include "gtuvos.h"
-#include "exitcmd.h"
-#include "lscmd.h"
+
 #include <QApplication>
 
 CommandFactory *CommandFactory::instance=NULL;
@@ -36,6 +30,8 @@ ICommand* CommandFactory::getCommand(QString str){
         cmd = new ExitCMD(parses);
     }else if(command.compare("ls")==0){
         cmd = new ListCMD(parses);
+    }else if(command.compare("mkdir")==0){
+        cmd = new MkdirCMD(parses);
     }else throw INVALID_COMMAND_EXCEPTION();
 
     return cmd;

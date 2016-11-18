@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     mailcmd.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
-    lscmd.cpp
+    lscmd.cpp \
+    mkdircmd.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,7 +36,8 @@ HEADERS += \
     helpcmd.h \
     exitcmd.h \
     lscmd.h \
-    gtuexceptions.h
+    gtuexceptions.h \
+    mkdircmd.h
 
 FORMS += \
     mainwindow.ui \

@@ -30,6 +30,14 @@ public:
       }
 };
 
+class DIR_EXIST_EXCEPTION : public exception{
+public:
+    virtual const char* what() const throw()
+      {
+        return "Directory already exist!";
+      }
+};
+
 
 
 

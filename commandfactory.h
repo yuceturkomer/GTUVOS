@@ -2,6 +2,14 @@
 #define COMMANDFACTORY_H
 
 #include "command.h"
+#include "gtuexceptions.h"
+#include "copycmd.h"
+#include "mailcmd.h"
+#include "helpcmd.h"
+#include "gtuvos.h"
+#include "exitcmd.h"
+#include "lscmd.h"
+#include "mkdircmd.h"
 
 class CommandFactory
 {
