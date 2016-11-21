@@ -10,10 +10,11 @@ MkdirCMD::MkdirCMD(QStringList params):ICommand(params)
 }
 
 void MkdirCMD::execute(Ui::MainWindow *window){
-
+    cout<<"Mkdir execute started."<<endl;
     try{
         if(mParams.size()!=2){
             printTerm(window,"Invalid mkdir parameter","red");
+            printTerm(window,"Please check help manual","blue");
             return;
         }
 
@@ -25,10 +26,8 @@ void MkdirCMD::execute(Ui::MainWindow *window){
             throw DIR_EXIST_EXCEPTION();
         }else{
             dir.mkpath(".");
-            printTerm(window,"Directory created!","blue");
+            printTerm(window,"Directory created : "+path,"blue");
         }
-
-
     }catch(exception& e){
         ICommand::printTerm(window,e.what(),"red");
     }
