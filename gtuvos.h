@@ -25,7 +25,9 @@ public:
     bool executeCMD(QString cmd); // execute command and return result
 
     double getVersion() const; // get system version number
+
     string getName() const; // get system name
+
     MailServer& getMailServer();
 
     /*
