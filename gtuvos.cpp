@@ -14,12 +14,19 @@ using namespace std;
 
 GTUVOS *GTUVOS::instance= NULL;
 
+GTUVOS::~GTUVOS(){
+    delete mailServer;
+    mailServer=NULL;
+    cout<<"GTUVOS destructed!"<<endl;
+}
+
 GTUVOS::GTUVOS(){
     name = "GTU Virtual OS";
     version = 1.6;
 
     prepareSystem();
 
+    mailServer = new MailServer();
     cout<<"GTUVOS constructed!"<<endl;
 }
 
@@ -27,7 +34,6 @@ void GTUVOS::prepareSystem(){
     cout<< "GTUVOS prepareSystem started!!"<<endl;
 
     checkRootFile();
-
     // check other dependencies
 
 }
@@ -63,15 +69,20 @@ bool GTUVOS::executeCMD(QString cmdStr){
     return true;
 }
 
-MailServer& GTUVOS::getMailServer(){
+MailServer* GTUVOS::getMailServer(){
     return mailServer;
+}
+
+string GTUVOS::getRootPath() const{
+    return ROOTFileName;
 }
 
 
 void GTUVOS::checkRootFile(){
 
+    string path=getRootPath();
     // gizli olarak root directory olmalı
-    QDir root("./.GTUVOSROOT");
+    QDir root(QString::fromStdString(path));
     if(root.exists()){
         cout<<"Root Directory exist."<<endl;
     }else{

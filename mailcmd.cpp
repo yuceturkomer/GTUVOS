@@ -40,14 +40,14 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setBody(mParams[4].toStdString());
        newMail.setCC("No CC");
 
-       GTUVOS::getInstance()->getMailServer().sendMail(newMail);
+       GTUVOS::getInstance()->getMailServer()->sendMail(newMail);
 
        QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"green");
 
    }else if(mParams[1].compare("list")==0){
-       vector<Mail> mails = GTUVOS::getInstance()->getMailServer().getAllMails();
+       vector<Mail> mails = GTUVOS::getInstance()->getMailServer()->getAllMails();
 
        if(mails.size()==0){
            ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","blue");

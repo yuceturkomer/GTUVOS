@@ -21,5 +21,6 @@ void ExitCMD::execute(Ui::MainWindow *mainWindow){
     printTerm(mainWindow,"GOOD BYE","red");
     //TODO: timer kullanarak ekranda mesaj belli bir sure gonrunsun
     // daha sonra kapansın program
+    delete GTUVOS::getInstance();
     QApplication::quit();
 }

@@ -14,6 +14,8 @@ class GTUVOS{
 
 public:
 
+    ~GTUVOS();
+
     // singleton system design
     static GTUVOS* getInstance(){
         if(instance == NULL)
@@ -28,7 +30,9 @@ public:
 
     string getName() const; // get system name
 
-    MailServer& getMailServer();
+    string getRootPath() const; // get os root file directory path
+
+    MailServer* getMailServer();
 
     Ui::MainWindow *window;
 
@@ -44,11 +48,11 @@ private:
 
     string name; // name of os
     double version; // version of os
+    string ROOTFileName = ".GTUVOSROOT";
+
+    MailServer* mailServer;
 
     static GTUVOS *instance; //singleton gtu vos instance
-
-
-    MailServer mailServer;
 
     /*
      * Check the our root directory

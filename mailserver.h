@@ -35,11 +35,11 @@ public:
      * Check the MailServer directory
      *
      * -Check the MailServer directory which is called "MailServer".
-     * "MailServer" directory is in the our source directory which is called "SourceFileGtuOS"
+     * "MailServer" directory is in the our source directory which is called "GTUVOSROOT"
      * if the "MailServer" directory doesn't exist then create it.
      *
      */
-    void checkMailServerDirectory();
+    string checkMailServerDirectory();
 
     /**
      * Check the mailArchive file
@@ -49,7 +49,7 @@ public:
      * mailArchive file is in the "MailServer" directory.
      * if the mailArchive file doesn't exist then create it.
      */
-    void checkMailArchiveFile();
+    string checkMailArchiveFile(string path);
 
     /**
      * Print All available commands On The Screen
@@ -67,6 +67,14 @@ public:
     string getSentMailArchiveFileName() const{return sentMailFile;}
     string getRecievedMailArchiveFileName() const{return recievedMailFile;}
 
+    const string getMailServerPath() const{
+        return MAILSERVERPATH;
+    }
+
+    const string getMailFileName() const{
+        return MAILFILENAME;
+    }
+
 
 private:
     /**
@@ -74,6 +82,9 @@ private:
      */
     string sentMailFile;
     string recievedMailFile;
+
+    const string MAILSERVERPATH = ".MailServer"; // hidden directory
+    const string MAILFILENAME = ".mails.txt";
 
     vector<Mail> sentMail;
     vector<Mail> recievedMail;
