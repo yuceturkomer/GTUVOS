@@ -24,5 +24,6 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
                          " - mail list<br>"
                          " - mail \"send\" \"to\" \"title\" \"message\"<br>"
                          " - ls - path (path is optional)<br>"
+                         " - exit<br>"
                          " - mkdir path</p><br>","blue");
 }
