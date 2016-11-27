@@ -3,6 +3,7 @@
 #include <vector>
 #include <QApplication>
 #include <QVector>
+#include <QDir>
 #include "command.h"
 #include "commandfactory.h"
 #include "mailcmd.h"
@@ -15,7 +16,7 @@ GTUVOS *GTUVOS::instance= NULL;
 
 GTUVOS::GTUVOS(){
     name = "GTU Virtual OS";
-    version = 1.3;
+    version = 1.6;
 
     prepareSystem();
 
@@ -24,14 +25,22 @@ GTUVOS::GTUVOS(){
 
 void GTUVOS::prepareSystem(){
     cout<< "GTUVOS prepareSystem started!!"<<endl;
-    // TODO: check os files
+
+    checkRootFile();
+
 }
 
 
+/*
+ * Isletim sisteminin on tanımlı versiyon numarasını dondurur
+ */
 double GTUVOS::getVersion() const{
     return version;
 }
 
+/*
+ * Istelim sisteminin adini dondurur
+ */
 string GTUVOS::getName() const{
     return name;
 }
@@ -54,4 +63,16 @@ bool GTUVOS::executeCMD(QString cmdStr){
 
 MailServer& GTUVOS::getMailServer(){
     return mailServer;
+}
+
+
+void GTUVOS::checkRootFile(){
+
+    QDir root("./.GTUVOSROOT");
+    if(root.exists()){
+        cout<<"Root Directory exist."<<endl;
+    }else{
+        root.mkpath(".");
+        cout<<"Root path created!"<<endl;
+    }
 }

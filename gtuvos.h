@@ -30,14 +30,6 @@ public:
 
     MailServer& getMailServer();
 
-    /*
-     * Check the our source directory
-     *
-     * -Check the our source directory which is called "SourceFileGtuOS".
-     * if the "SourceFileGtuOS" directory doesn't exist then create it.
-     */
-    void checkSourceFileDirectory();
-
     Ui::MainWindow *window;
 
 private:
@@ -48,6 +40,14 @@ private:
     double version;
     static GTUVOS *instance;
     MailServer mailServer;
+
+    /*
+     * Check the our source directory
+     *
+     * -Check the our source directory which is called "SourceFileGtuOS".
+     * if the "GTUVOSROOT" directory doesn't exist then create it.
+     */
+    void checkRootFile();
 
 };
 
