@@ -28,6 +28,8 @@ void GTUVOS::prepareSystem(){
 
     checkRootFile();
 
+    // check other dependencies
+
 }
 
 
@@ -68,6 +70,7 @@ MailServer& GTUVOS::getMailServer(){
 
 void GTUVOS::checkRootFile(){
 
+    // gizli olarak root directory olmalı
     QDir root("./.GTUVOSROOT");
     if(root.exists()){
         cout<<"Root Directory exist."<<endl;

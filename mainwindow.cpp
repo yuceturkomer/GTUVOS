@@ -6,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow)
 {
 
-    currentInput=0;
+    currentInput=0; // input box icin history sırası
     ui->setupUi(this);
 
     // get system informations and print on startup

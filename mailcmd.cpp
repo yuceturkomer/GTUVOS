@@ -22,7 +22,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
    if(mParams[1].compare("send")==0){
        if(mParams.size() <5){
-           ICommand::printTerm(window,"Mail send invalid parameters","red");
+           ICommand::printTerm(window,"Mail Send Error: Invalid Parameters","red");
            return;
        }
 
@@ -34,9 +34,11 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        Mail newMail;
 
+       newMail.setFrom("admin@gtuvos.edu.tr");
        newMail.setTo(mParams[2].toStdString());
        newMail.setSubject(mParams[3].toStdString());
        newMail.setBody(mParams[4].toStdString());
+       newMail.setCC("No CC");
 
        GTUVOS::getInstance()->getMailServer().sendMail(newMail);
 
