@@ -22,7 +22,7 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
     printTerm(mainWindow,"<p style=\"white-space:pre;\"> - help<br>"
                          " - cp file_source file_destination<br>"
                          " - mail list<br>"
-                         " - mail \"send\" \"to\" \"title\" \"message\"<br>"
+                         " - mail send \"to\" \"title\" \"message\"<br>"
                          " - ls - path (path is optional)<br>"
                          " - exit<br>"
                          " - mkdir path</p><br>","blue");

@@ -22,6 +22,9 @@ public:
     //Key press event listener
     void keyPressEvent(QKeyEvent *event);
 
+private slots:
+    void on_terminalScreen_cursorPositionChanged();
+
 private:
     Ui::MainWindow *ui;
 

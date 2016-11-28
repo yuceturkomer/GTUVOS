@@ -107,3 +107,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 }
 
+
+void MainWindow::on_terminalScreen_cursorPositionChanged()
+{
+    // Scroll down automatically
+    ui->terminalScreen->moveCursor(QTextCursor::End);
+    ui->terminalScreen->ensureCursorVisible();
+}
