@@ -20,7 +20,7 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
     printTerm(mainWindow,"<p style=\"white-space:pre;\">--- Help Manual ---</p>","purple");
     printTerm(mainWindow,"<p style=\"white-space:pre;\">The available commands are:</p>","purple");
     printTerm(mainWindow,"<p style=\"white-space:pre;\"> - help<br>"
-                         " - cp file_source file_destination<br>"
+                         " - cp file_source file_destination behavior(optional)<br>"
                          " - mail list<br>"
                          " - mail send \"to\" \"title\" \"message\"<br>"
                          " - ls - path (path is optional)<br>"
