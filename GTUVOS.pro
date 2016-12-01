@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
     lscmd.cpp \
-    mkdircmd.cpp
+    mkdircmd.cpp \
+    touchcmd.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,7 +38,8 @@ HEADERS += \
     exitcmd.h \
     lscmd.h \
     gtuexceptions.h \
-    mkdircmd.h
+    mkdircmd.h \
+    touchcmd.h
 
 FORMS += \
     mainwindow.ui \
