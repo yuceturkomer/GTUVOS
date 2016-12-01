@@ -32,7 +32,10 @@ ICommand* CommandFactory::getCommand(QString str){
         cmd = new ListCMD(parses);
     }else if(command.compare("mkdir")==0){
         cmd = new MkdirCMD(parses);
-    }else throw INVALID_COMMAND_EXCEPTION();
+    }else if(command.compare("touch")==0){
+        cmd=new TouchCMD(parses);
+    }
+    else throw INVALID_COMMAND_EXCEPTION();
 
     return cmd;
 }

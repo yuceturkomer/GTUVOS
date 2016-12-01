@@ -10,6 +10,7 @@
 #include "exitcmd.h"
 #include "lscmd.h"
 #include "mkdircmd.h"
+#include "touchcmd.h"
 
 class CommandFactory
 {
