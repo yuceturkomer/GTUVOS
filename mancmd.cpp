@@ -21,16 +21,37 @@ void manCMD::execute(Ui::MainWindow* window){
     if(mParams.size()==1){
         char path[255];
         getcwd(path,255);
-        printTerm(window,"Path: "+QString::fromUtf8(path));
+        printTerm(window,"Invalid command");
+        printTerm(window,"Usage: man [command]");
         DisplayManual(window,path);
-    }else{
-        printTerm(window,"Path: "+mParams[1]);
+    }else if(mParams.size()==2){
+        printTerm(window,"Command: "+mParams[1]);
         DisplayManual(window,mParams[1].toStdString().c_str());
     }
 }
 
-void manCMD::DisplayManual(Ui::MainWindow* window,const char* path){
+void manCMD::DisplayManual(Ui::MainWindow* window,const char* command){
 //will be implement
+
+    QString piece = mParams[1];
+
+    if(piece.compare("ls")==0){
+
+        //printTerm(window,"LS good ");
+
+    }else if(piece.compare("ls")==0){
+
+        //will implement
+
+    } else if(piece.compare("ls")==0){
+
+
+
+    }else if(piece.compare("ls")==0){
+
+
+
+    }
 
 
 }

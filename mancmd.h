@@ -23,7 +23,7 @@ public:
     manCMD(QStringList params);
     void execute(Ui::MainWindow *mainWindow);
 private:
-    void DisplayManual(Ui::MainWindow* window,const char* path);
+    void DisplayManual(Ui::MainWindow* window,const char* command);
 
 };
 
