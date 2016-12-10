@@ -54,10 +54,10 @@ void ListCMD::traversepath(Ui::MainWindow* window,const char* path)
             if(direntp->d_type==DT_DIR){
                 str.append("Dir->");
                 str.append(direntp->d_name).append("\n");
-                printTerm(window,str,"green");
+                printTerm(window,str,"LawnGreen");
             }else{
                 str.append(direntp->d_name).append("\n");
-                printTerm(window,str,"blue");
+                printTerm(window,str,"DeepSkyBlue");
             }
             ++total;
         }

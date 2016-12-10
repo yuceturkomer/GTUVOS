@@ -1,6 +1,7 @@
 #include <QApplication>
 #include "mainwindow.h"
 #include "gtuvos.h"
+#include "command.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWindow)
@@ -11,11 +12,33 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
 
     // get system informations and print on startup
     double version = GTUVOS::getInstance()->getVersion();
-    QString name = QString::fromStdString(GTUVOS::getInstance()->getName());
-    ui->terminalScreen->insertPlainText("Welcome to "+name+"\n");
-    ui->terminalScreen->insertPlainText("Version "+QString::number(version)+"\n");
-    ui->terminalScreen->insertPlainText("Write 'help' to see all commands""\n");
-    ui->terminalScreen->insertPlainText("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+    QString name = QString::fromStdString(GTUVOS::getInstance()->getName());    
+
+    ICommand::printTerm(ui,"Welcome to" +name+"\n");
+    ICommand::printTerm(ui,"Version "+QString::number(version)+"\n");
+    ICommand::printTerm(ui,"Write 'help' to see all commands""\n");
+    ICommand::printTerm(ui,"~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+
+    QWidget *theWidget = ui->centralwidget;
+    QTextBrowser *theBrowser = ui->terminalScreen;
+    QLineEdit *theEdit = ui->inputBox;
+
+    //The color palettes
+    QPalette Pal(palette()), Pal2(palette()), Pal3(palette());
+    Pal.setColor(QPalette::Background, Qt::black);
+    Pal2.setColor(QPalette::Base, Qt::darkGray);
+    Pal3.setColor(QPalette::Base, Qt::lightGray);
+
+    theWidget->setAutoFillBackground(true);
+    theWidget->setPalette(Pal);
+    theWidget->show();
+
+    theBrowser->setStyleSheet("QTextBrowser { background-color : black; color : lime; }"); //Stylesheet used, not the palette
+    theBrowser->show();
+
+    theEdit->setAutoFillBackground(true);
+    theEdit->setPalette(Pal3);
+    theEdit->show();
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +63,8 @@ void MainWindow::textEditEnterPres()
 
     // Res stands for the result. Gets the return value of executeCmd. ExecuteCmd calls the parse function.
     ui->terminalScreen->insertPlainText("\n\n> ");
+
+
     GTUVOS::getInstance()->executeCMD(command);
 
     // Scroll down automatically
@@ -107,7 +132,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 }
 
-
+/**
+ * @brief MainWindow::on_terminalScreen_cursorPositionChanged
+ * This function changes the cursor position on terminal screen
+ * to the bottom in order to avoid mixed outputs.
+ */
 void MainWindow::on_terminalScreen_cursorPositionChanged()
 {
     // Scroll down automatically

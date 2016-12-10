@@ -16,7 +16,7 @@ void TouchCMD::execute(Ui::MainWindow *window){
     try{
         if(mParams.size()!=2){
             printTerm(window,"Invalid touch parameter","red");
-            printTerm(window,"Please check help manuel","blue");
+            printTerm(window,"Please check help manual","DeepSkyBlue");
             return;
         }
 
@@ -31,7 +31,7 @@ void TouchCMD::execute(Ui::MainWindow *window){
         else{
             myFile.open(QIODevice::WriteOnly);
             myFile.close();
-            printTerm(window,"File created : "+path,"blue");
+            printTerm(window,"File created : "+path,"DeepSkyBlue");
         }
     }catch(exception& e){
         ICommand::printTerm(window,e.what(),"red");
