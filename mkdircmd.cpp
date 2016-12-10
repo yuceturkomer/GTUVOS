@@ -14,7 +14,7 @@ void MkdirCMD::execute(Ui::MainWindow *window){
     try{
         if(mParams.size()!=2){
             printTerm(window,"Invalid mkdir parameter","red");
-            printTerm(window,"Please check help manual","blue");
+            printTerm(window,"Please check help manual","LawnGreen");
             return;
         }
 
@@ -26,7 +26,7 @@ void MkdirCMD::execute(Ui::MainWindow *window){
             throw DIR_EXIST_EXCEPTION();
         }else{
             dir.mkpath(".");
-            printTerm(window,"Directory created : "+path,"blue");
+            printTerm(window,"Directory created : "+path,"LawnGreen");
         }
     }catch(exception& e){
         ICommand::printTerm(window,e.what(),"red");

@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     Pal.setColor(QPalette::Background, Qt::black);
     Pal2.setColor(QPalette::Base, Qt::darkGray);
     Pal2.setColor(QPalette::Foreground, Qt::white);
-    Pal3.setColor(QPalette::Base, Qt::gray);
+    Pal3.setColor(QPalette::Base, Qt::lightGray);
 
     theWidget->setAutoFillBackground(true);
     theWidget->setPalette(Pal);
