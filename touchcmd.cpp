@@ -16,7 +16,7 @@ void TouchCMD::execute(Ui::MainWindow *window){
     try{
         if(mParams.size()!=2){
             printTerm(window,"Invalid touch parameter","red");
-            printTerm(window,"Please check help manuel","DeepSkyBlue");
+            printTerm(window,"Please check help manual","DeepSkyBlue");
             return;
         }
 
