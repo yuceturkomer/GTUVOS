@@ -21,6 +21,8 @@ MailCMD::MailCMD(QStringList params):ICommand(params)
 
 void MailCMD::execute(Ui::MainWindow *window){
 
+    Mail newMail;
+
    if(mParams.size()<2){
        ICommand::printTerm(window,"Please type a mail operation send/list","red");
        return;
@@ -38,7 +40,6 @@ void MailCMD::execute(Ui::MainWindow *window){
 //       log.append("\tMAIL: ").append(mParams[4]).append("\n");
 //       cout<<"MailSent log:"<<log<<endl;
 
-       Mail newMail;
 
        newMail.setFrom("admin@gtuvos.edu.tr");
        newMail.setTo(mParams[2].toStdString());
@@ -46,27 +47,38 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setBody(mParams[4].toStdString());
        newMail.setCC("No CC");
 
-       GTUVOS::getInstance()->getMailServer()->sendMail(newMail);
+      sendMail.push_back(newMail);
+      mails.push_back(newMail);
+
+      writeToFile();
+
 
        QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
 
    }else if(mParams[1].compare("list")==0){
-       vector<Mail> mails = GTUVOS::getInstance()->getMailServer()->getAllMails();
+    bool status;
 
        if(mails.size()==0){
            ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","DeepSkyBlue");
        }
+        status=readMailFile("sendMail.xml");
 
-       for(unsigned int i=0;i!=mails.size();++i){
-           QString mail="";
-           mail.append(QString::number(i)).append(". Mail:<br>");
-           mail.append("TO: ").append(QString::fromStdString(mails[i].getTo())).append("<br>");
-           mail.append("TITLE: ").append(QString::fromStdString(mails[i].getSubject())).append("<br>");
-           mail.append("MESSAGE: ").append(QString::fromStdString(mails[i].getBody())).append("<br>");
-           ICommand::printTerm(window,mail);
-       }
+        if(status == false){
+            ICommand::printTerm(window,"No mail in archive!\n Send a mail first");
+
+        }else{
+                for(unsigned int i=0;i!=mails.size();++i){
+                    QString mail="";
+                    mail.append(QString::number(i)).append(". Mail:<br>");
+                    mail.append("TO: ").append(QString::fromStdString(mails[i].getTo())).append("<br>");
+                    mail.append("TITLE: ").append(QString::fromStdString(mails[i].getSubject())).append("<br>");
+                    mail.append("MESSAGE: ").append(QString::fromStdString(mails[i].getBody())).append("<br>");
+                    ICommand::printTerm(window,mail);
+            }
+        }
+
    }else{
        ICommand::printTerm(window,"Invalid mail action. Please use help manual","red");
    }
@@ -85,19 +97,20 @@ void MailCMD::execute(Ui::MainWindow *window){
 
 }
 
-
-void MailCMD::readMailFile(string fileName){
+bool MailCMD::readMailFile(string fileName){
 
     xml_document<> doc;
     xml_node<> * root_node;
     // Read the xml file into a vector
-    ifstream theFile (fileName,std::ios::in);
+    ifstream theFile(fileName);
     vector<char> buffer((istreambuf_iterator<char>(theFile)), istreambuf_iterator<char>());
     buffer.push_back('\0');
     // Parse the buffer using the xml file parsing library into doc
     doc.parse<0>(&buffer[0]);
     // Find our root node
     root_node = doc.first_node("sentMail");
+
+    if(theFile.is_open()){
 
 for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_node = mail_node->next_sibling())
     {
@@ -134,8 +147,13 @@ for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_no
             tempMail.setBody(body_node->value());
         //}
 
-        cout<<endl<<endl;
         mails.push_back(tempMail);
+    }
+
+    return true;
+   }else{
+
+       return false;
     }
 
 }

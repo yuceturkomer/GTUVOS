@@ -14,7 +14,7 @@ public:
     MailCMD(QStringList str);
     ~MailCMD();
     void execute(Ui::MainWindow *window);
-    void readMailFile(string fileName);
+    bool readMailFile(string fileName);
     void writeToFile();
 private:
     vector<Mail> mails;
