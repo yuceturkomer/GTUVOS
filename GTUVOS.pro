@@ -1,7 +1,9 @@
 TEMPLATE = app
 
 QT += qml quick widgets
-CONFIG += c++11
+CONFIG +=\
+   c++11\
+   precompile_header
 
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -9,14 +11,13 @@ SOURCES += main.cpp \
     gtuvos.cpp \
     copycmd.cpp \
     commandfactory.cpp \
-    lscmd.cpp \
     mail.cpp \
     mailcmd.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
+    lscmd.cpp \
     mkdircmd.cpp \
-    touchcmd.cpp \
-    mancmd.cpp\
+    touchcmd.cpp
 
 
 RESOURCES += qml.qrc
@@ -26,6 +27,9 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+PRECOMPILED_HEADER += \
+    precompiledxml.h
 
 HEADERS += \
     mailserver.h \
@@ -42,9 +46,7 @@ HEADERS += \
     gtuexceptions.h \
     mkdircmd.h \
     touchcmd.h \
-    mancmd.h \
-    rapidxml_utils.hpp \
-    rapidxml.hpp
+    precompiledxml.h
 
 FORMS += \
     mainwindow.ui \

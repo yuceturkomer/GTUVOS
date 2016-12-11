@@ -4,8 +4,9 @@
 #include <vector>
 #include "gtuvos.h"
 #include "command.h"
-#include"rapidxml.hpp"
-#include"rapidxml_utils.hpp"
+#include "precompiledxml.h"
+
+using namespace rapidxml;
 
 class MailCMD : public ICommand
 {
@@ -16,7 +17,7 @@ public:
     void readMailFile(string fileName);
     void writeToFile();
 private:
-	vector<Mail> mails;
+    vector<Mail> mails;
     vector<Mail> sendMail;
 };
 

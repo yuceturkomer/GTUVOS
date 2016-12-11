@@ -6,8 +6,7 @@
 #include <QApplication>
 #include "gtuvos.h"
 #include "mail.h"
-#include "rapidxml.hpp"
-#include "rapidxml_utils.hpp"
+#include <precompiledxml.h>
 
 using namespace std;
 
@@ -72,7 +71,6 @@ void MailCMD::execute(Ui::MainWindow *window){
 /*
    ofstream sendMailFileArchive;
    sendMailFileArchive.open("sendMail.xml",std::ios_base::app);
-
    sendMailFileArchive<<"<email>"<<endl<<"\t"
               <<"<from>"<<newMail.getFrom()<<"</from>"<<endl<<"\t"
               <<"<to>"<<newMail.getTo()<<"</to>"<<endl<<"\t"
@@ -99,48 +97,45 @@ void MailCMD::readMailFile(string fileName){
 	// Find our root node
 	root_node = doc.first_node("sentMail");
 
-	
 for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_node = mail_node->next_sibling())
-	{
-		Mail tempMail;
-	    xml_node<> * from_node = mail_node->first_node("from");
-	    xml_node<> * to_node = mail_node->first_node("to");
-	   // xml_node<> * cc_node = mail_node->first_node("cc");
-	   //xml_node<> * bcc_node = mail_node->first_node("bcc");
-	    xml_node<> * subject_node = mail_node->first_node("subject");
-	    xml_node<> * body_node = mail_node->first_node("body");
+    {
+        Mail tempMail;
+        xml_node<> * from_node = mail_node->first_node("from");
+        xml_node<> * to_node = mail_node->first_node("to");
+       // xml_node<> * cc_node = mail_node->first_node("cc");
+       //xml_node<> * bcc_node = mail_node->first_node("bcc");
+        xml_node<> * subject_node = mail_node->first_node("subject");
+        xml_node<> * body_node = mail_node->first_node("body");
+        //for(xml_node<> * from_node = mail_node->first_node("from"); from_node; from_node = from_node->next_sibling())
+        //{
+            tempMail.setFrom(from_node->value());
+        //}
+        //for(xml_node<> * to_node = mail_node->first_node("to"); to_node; to_node = to_node->next_sibling())
+        //{
+            tempMail.setTo(to_node->value());
+        //}
+        //for(xml_node<> * cc_node = mail_node->first_node("cc"); cc_node; cc_node = cc_node->next_sibling())
+        //{
+        //	if(cc_node->value() !=" ")
+        //	tempMail.setCC(cc_node->value());
+        //}
+        //for(xml_node<> * bcc_node = mail_node->first_node("bcc"); bcc_node; bcc_node = bcc_node->next_sibling())
+        //{
+       //  if(bcc_node->value() != " ")
+        //	tempMail.setBCC(bcc_node->value());
+        //for(xml_node<> * subject_node = mail_node->first_node("subject"); subject_node; subject_node = subject_node->next_sibling())
+        //{
+            tempMail.setSubject(subject_node->value());
+       // }
+        //for(xml_node<> * body_node = mail_node->first_node("body"); body_node; body_node = body_node->next_sibling())
+        //{
+            tempMail.setBody(body_node->value());
+        //}
 
-	    //for(xml_node<> * from_node = mail_node->first_node("from"); from_node; from_node = from_node->next_sibling())
-	    //{
-	    	tempMail.setFrom(from_node->value());
-	    //}
-	    //for(xml_node<> * to_node = mail_node->first_node("to"); to_node; to_node = to_node->next_sibling())
-	    //{
-	    	tempMail.setTo(to_node->value());
-	    //}
-	    //for(xml_node<> * cc_node = mail_node->first_node("cc"); cc_node; cc_node = cc_node->next_sibling())
-	    //{
-	    //	if(cc_node->value() !=" ")
-	    //	tempMail.setCC(cc_node->value());
-	    //}
-	    //for(xml_node<> * bcc_node = mail_node->first_node("bcc"); bcc_node; bcc_node = bcc_node->next_sibling())
-	    //{
-	   //  if(bcc_node->value() != " ")
-	    //	tempMail.setBCC(bcc_node->value());
-
-	    //for(xml_node<> * subject_node = mail_node->first_node("subject"); subject_node; subject_node = subject_node->next_sibling())
-	    //{
-	    	tempMail.setSubject(subject_node->value());
-	   // }
-	    //for(xml_node<> * body_node = mail_node->first_node("body"); body_node; body_node = body_node->next_sibling())
-	    //{
-	    	tempMail.setBody(body_node->value());
-	    //}
-	    
-	    cout<<endl<<endl;
+        cout<<endl<<endl;
         mails.push_back(tempMail);
     }
-*/
+
 }
 
 void MailCMD::writeToFile(){
