@@ -45,7 +45,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
       sendMail.push_back(newMail);
       mails.push_back(newMail);
-
+      writeToFile();
        QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"green");
