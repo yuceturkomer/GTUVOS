@@ -71,10 +71,18 @@ public:
         return MAILSERVERPATH;
     }
 
+    void addDraft(mail newMail){ draftMail.push_back(newMail);};
     const string getMailFileName() const{
         return MAILFILENAME;
     }
 
+
+
+private slots:
+    /**
+     * push the sendMail button
+     */
+    void on_pushButton_clicked();
 
 private:
     /**
