@@ -14,11 +14,11 @@ public:
     MailCMD(QStringList str);
     ~MailCMD();
     void execute(Ui::MainWindow *window);
-    bool readMailFile(string fileName);
-    void writeToFile();
-private:
-    vector<Mail> mails;
-    vector<Mail> sendMail;
+    bool readMailFile(string fileName, vector<Mail>);
+    void writeToFile(vector<Mail>);
+//private:
+//    vector<Mail> mails;
+//    vector<Mail> sendMail;
 };
 
 #endif // MAILCMD_H

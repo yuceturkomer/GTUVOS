@@ -47,34 +47,38 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setBody(mParams[4].toStdString());
        newMail.setCC("No CC");
 
-      sendMail.push_back(newMail);
-      mails.push_back(newMail);
+       GTUVOS::getInstance()->getMailServer()->sendMail(newMail);
+//      sendMail.push_back(newMail);
+//      mails.push_back(newMail);
 
-      writeToFile();
+
+      writeToFile(GTUVOS::getInstance()->getMailServer()->getAllMails());
 
 
        QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
-
+       //cout<<mails.size()<<endl;
    }else if(mParams[1].compare("list")==0){
     bool status;
 
-       if(mails.size()==0){
+    vector<Mail> mailto = GTUVOS::getInstance()->getMailServer()->getAllMails();
+
+       if(mailto.size()==0){
            ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","DeepSkyBlue");
        }
-        status=readMailFile("sendMail.xml");
+        status=readMailFile("sendMail.xml", GTUVOS::getInstance()->getMailServer()->getAllMails());
 
-        if(status == false){
+        if(status == false && mailto.size() == 0){
             ICommand::printTerm(window,"No mail in archive!\n Send a mail first");
 
         }else{
-                for(unsigned int i=0;i!=mails.size();++i){
+                for(unsigned int i=0;i!=mailto.size();++i){
                     QString mail="";
                     mail.append(QString::number(i)).append(". Mail:<br>");
-                    mail.append("TO: ").append(QString::fromStdString(mails[i].getTo())).append("<br>");
-                    mail.append("TITLE: ").append(QString::fromStdString(mails[i].getSubject())).append("<br>");
-                    mail.append("MESSAGE: ").append(QString::fromStdString(mails[i].getBody())).append("<br>");
+                    mail.append("TO: ").append(QString::fromStdString(mailto[i].getTo())).append("<br>");
+                    mail.append("TITLE: ").append(QString::fromStdString(mailto[i].getSubject())).append("<br>");
+                    mail.append("MESSAGE: ").append(QString::fromStdString(mailto[i].getBody())).append("<br>");
                     ICommand::printTerm(window,mail);
             }
         }
@@ -97,7 +101,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
 }
 
-bool MailCMD::readMailFile(string fileName){
+bool MailCMD::readMailFile(string fileName,vector<Mail> mailList){
 
     xml_document<> doc;
     xml_node<> * root_node;
@@ -147,7 +151,8 @@ for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_no
             tempMail.setBody(body_node->value());
         //}
 
-        mails.push_back(tempMail);
+        mailList.push_back(tempMail);
+
     }
 
     return true;
@@ -158,7 +163,7 @@ for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_no
 
 }
 
-void MailCMD::writeToFile(){
+void MailCMD::writeToFile(vector<Mail> mailList){
 
   ofstream mailArchive;
 
@@ -166,17 +171,18 @@ void MailCMD::writeToFile(){
 
   mailArchive<<"<?xml version=\"1.0\"? encoding=\"utf-8\"?>\n<sentMail>\n";
 
-           for(int i=0;i<mails.size();i++){
+           for(int i=0;i< mailList.size();i++){
                mailArchive<<"<email>"<<endl<<"\t"
-                         <<"<from>"<<mails.at(i).getFrom()<<"</from>"<<endl<<"\t"
-                         <<"<to>"<<mails.at(i).getTo()<<"</to>"<<endl<<"\t"
-                         <<"<cc>"<<mails.at(i).getCC()<<"</cc>"<<endl<<"\t"
-                        <<"<subject>"<<mails.at(i).getSubject()<<"</subject>"<<endl<<"\t"
-                        <<"<body>"<<mails.at(i).getBody()<<"</body>"<<endl
+                         <<"<from>"<<mailList[i].getFrom()<<"</from>"<<endl<<"\t"
+                         <<"<to>"<<mailList.at(i).getTo()<<"</to>"<<endl<<"\t"
+
+                        <<"<subject>"<<mailList.at(i).getSubject()<<"</subject>"<<endl<<"\t"
+                        <<"<body>"<<mailList.at(i).getBody()<<"</body>"<<endl
                        <<"</email>"<<endl;
            }
 
     mailArchive<<"</sentMail>\n";
+    mailArchive.close();
 }
 
 
