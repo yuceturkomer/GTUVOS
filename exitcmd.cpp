@@ -2,6 +2,7 @@
 #include "command.h"
 #include "QApplication"
 #include "gtuvos.h"
+#include <QTimer>
 
 
 #include <iostream>
@@ -17,5 +18,9 @@ ExitCMD::ExitCMD(QStringList params):ICommand(params)
 }
 
 void ExitCMD::execute(Ui::MainWindow *mainWindow){
+    printTerm(mainWindow,"GOOD BYE","white");
+    //TODO: timer kullanarak ekranda mesaj belli bir sure gonrunsun
+    // daha sonra kapansın program
+    delete GTUVOS::getInstance();
     QApplication::quit();
 }

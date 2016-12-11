@@ -1,8 +1,11 @@
 #include "mailcmd.h"
 #include "mailserver.h"
 #include <iostream>
+<<<<<<< HEAD
 #include <string>
 #include <fstream>
+=======
+>>>>>>> master
 #include <QApplication>
 #include "gtuvos.h"
 #include "mail.h"
@@ -43,6 +46,7 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setBody(mParams[4].toStdString());
        newMail.setCC("No CC");
 
+<<<<<<< HEAD
       sendMail.push_back(newMail);
       mails.push_back(newMail);
       writeToFile();
@@ -55,6 +59,19 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        if(mails.size()==0){
            ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","blue");
+=======
+       GTUVOS::getInstance()->getMailServer()->sendMail(newMail);
+
+       QString msg="Mail has been sent to: ";
+       msg.append(QString::fromStdString(newMail.getTo()));
+       ICommand::printTerm(window,msg,"LawnGreen");
+
+   }else if(mParams[1].compare("list")==0){
+       vector<Mail> mails = GTUVOS::getInstance()->getMailServer()->getAllMails();
+
+       if(mails.size()==0){
+           ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","DeepSkyBlue");
+>>>>>>> master
        }
 
        for(unsigned int i=0;i!=mails.size();++i){
@@ -71,6 +88,10 @@ void MailCMD::execute(Ui::MainWindow *window){
 /*
    ofstream sendMailFileArchive;
    sendMailFileArchive.open("sendMail.xml",std::ios_base::app);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
    sendMailFileArchive<<"<email>"<<endl<<"\t"
               <<"<from>"<<newMail.getFrom()<<"</from>"<<endl<<"\t"
               <<"<to>"<<newMail.getTo()<<"</to>"<<endl<<"\t"

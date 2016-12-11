@@ -47,57 +47,77 @@ CopyCMD::~CopyCMD(){
  */
 void CopyCMD::execute(Ui::MainWindow *mainWindow){
 
-    // Information for running the command
-    mainWindow->terminalScreen->insertPlainText("CopyCMD execute cmd\n\n");
-
     // Check the parameter size
-    if(mParams.size()!=3) // If parameter size (not include 'cp' command word) not equal 2, then print the error message.
-       mainWindow->terminalScreen->insertPlainText("You must give 2 parameter for copy file command.");
+    if(mParams.size()<3 || mParams.size()>4) // If parameter size (not include 'cp' command word) not equal 2 or 3, then print the error message.
+       printTerm(mainWindow,"You must give 2 or 3 parameter for copy file command.","red");
+
     else{
 
-        string theNameOfTheCopyFileCreated; // The name of the copy file created
-        int resultOfCopyFile;               // Result of copyFile function
+        if(mParams.size() == 3 ||
+           mParams.at(LOCATION_OF_BEHAVIOR_IN_STRING) == "1" ||
+           mParams.at(LOCATION_OF_BEHAVIOR_IN_STRING) == "2"){// If parameter LOCATION_OF_BEHAVIOR_IN_STRING is valid, then make the copy.
 
-        // Call the copyFile function
-        resultOfCopyFile = copyFile(mParams[LOCATION_OF_SOURCE_PATH_IN_STRING].toStdString(),mParams[LOCATION_OF_TARGET_PATH_IN_STRING].toStdString(),IF_THE_FILE_ALREADY_EXISTS_OVERWRITE,&theNameOfTheCopyFileCreated);
+            string theNameOfTheCopyFileCreated; // The name of the copy file created
+            int resultOfCopyFile;               // Result of copyFile function
 
-        // If the file copy was successful.
-        if(resultOfCopyFile == SUCCESS_COPY_FILE){
+            if(mParams.size() == 3){
+                // Call the copyFile function with IF_THE_FILE_ALREADY_EXISTS_OVERWRITE
+                resultOfCopyFile = copyFile(mParams[LOCATION_OF_SOURCE_PATH_IN_STRING].toStdString(),mParams[LOCATION_OF_TARGET_PATH_IN_STRING].toStdString(),IF_THE_FILE_ALREADY_EXISTS_OVERWRITE,&theNameOfTheCopyFileCreated);
+            }
+            else if( mParams.at(LOCATION_OF_BEHAVIOR_IN_STRING) == "1"){
+                // Call the copyFile function with IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING
+                resultOfCopyFile = copyFile(mParams[LOCATION_OF_SOURCE_PATH_IN_STRING].toStdString(),mParams[LOCATION_OF_TARGET_PATH_IN_STRING].toStdString(),IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING,&theNameOfTheCopyFileCreated);
+            }
+            else if( mParams.at(LOCATION_OF_BEHAVIOR_IN_STRING) == "2"){
+                // Call the copyFile function with IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME
+                resultOfCopyFile = copyFile(mParams[LOCATION_OF_SOURCE_PATH_IN_STRING].toStdString(),mParams[LOCATION_OF_TARGET_PATH_IN_STRING].toStdString(),IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME,&theNameOfTheCopyFileCreated);
+            }
 
-            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);           // Create QString for print
-            mainWindow->terminalScreen->insertPlainText("File copy was successful. Name of the copy file created: " );  // Print message
-            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                            // Print the name of the copy file created
-
+            // If the file copy was successful.
+            if(resultOfCopyFile == SUCCESS_COPY_FILE){
+                printTerm(mainWindow,"File copy was successful. Name of the copy file created: "+
+                          QString::fromStdString(theNameOfTheCopyFileCreated),"green");  // Print message
+            }
+            // If the file already exists then overwrite
+            else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_OVERWRITE)
+            {
+                printTerm(mainWindow,"File copy and overwrite the existing file was successful. Name of the copy file created: "+
+                                 QString::fromStdString(theNameOfTheCopyFileCreated),"green"); // Print the name of the copy file created
+            }
+            // If the file already exists, then do nothing
+            else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING)
+            {
+                printTerm(mainWindow,"The file already exists in the target path. Nothing was done. ","grey");  // Print error message
+            }
+            // If the file already exists, then change the file name
+            else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME)
+            {
+                printTerm(mainWindow,"File copy and change the file name was successful. Name of the copy file created: "+
+                                 QString::fromStdString(theNameOfTheCopyFileCreated),"green"); // Print the name of the copy file created
+            }
+            // If the file copy was unsuccessful.
+            else if (resultOfCopyFile == FAIL_COPY_FILE)
+            {
+                printTerm(mainWindow,"File copy was unsuccessful.","red");  // Print error message
+            }
+            // If path not exist or not a file
+            else if (resultOfCopyFile == FILE_PATH_NOT_EXIST_OR_NOT_A_FILE)
+            {
+                printTerm(mainWindow,"FilePath is not exist or is not a file name.","red");  // Print error message
+            }
+            // If target path not exist or not a directory
+            else if (resultOfCopyFile == TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY)
+            {
+                printTerm(mainWindow,"TargetPath is not exist or is not a directory name.","red");  // Print error message
+            }
+            // If created file deleted during copy process
+            else if (resultOfCopyFile == CREATED_FILE_DELETED_DURING_COPY_PROCESS)
+            {
+                printTerm(mainWindow,"The created file was deleted during the process.","red");  // Print error message
+            }
+        }else{// If parameter LOCATION_OF_BEHAVIOR_IN_STRING is invalid, then print the error message.
+            printTerm(mainWindow,"Behavior parameter can be 1 or 2.","red");
         }
-        // If the file already exists overwrite
-        else if (resultOfCopyFile == IF_THE_FILE_ALREADY_EXISTS_OVERWRITE)
-        {
-            QString theNameOfTheCopyFileCreatedQString = QString::fromStdString(theNameOfTheCopyFileCreated);                                      // Create QString for print
-            mainWindow->terminalScreen->insertPlainText("File copy and overwrite the existing file successful. Name of the copy file created: " ); // Print message
-            mainWindow->terminalScreen->insertPlainText(theNameOfTheCopyFileCreatedQString);                                                       // Print the name of the copy file created
-
-        }
-        // If the file copy was unsuccessful.
-        else if (resultOfCopyFile == FAIL_COPY_FILE)
-        {
-            mainWindow->terminalScreen->insertPlainText("File copy was unsuccessful." );  // Print error message
-        }
-        // If path not exist or not a file
-        else if (resultOfCopyFile == FILE_PATH_NOT_EXIST_OR_NOT_A_FILE)
-        {
-            mainWindow->terminalScreen->insertPlainText("FilePath is not exist or is not a file name." );  // Print error message
-        }
-        // If target path not exist or not a directory
-        else if (resultOfCopyFile == TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY)
-        {
-            mainWindow->terminalScreen->insertPlainText("TargetPath is not exist or is not a directory name." );  // Print error message
-        }
-        // If created file deleted during copy process
-        else if (resultOfCopyFile == CREATED_FILE_DELETED_DURING_COPY_PROCESS)
-        {
-            mainWindow->terminalScreen->insertPlainText("The created file was deleted during the process." );  // Print error message
-        }
-
     }
 }
 

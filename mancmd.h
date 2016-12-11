@@ -1,5 +1,6 @@
-#ifndef LSCMD
-#define LSCMD
+#ifndef MANCMD
+#define MANCMD
+
 
 #include <QApplication>
 #include "command.h"
@@ -15,14 +16,20 @@
 
 using namespace  std;
 
-class ListCMD : public ICommand
+class manCMD : public ICommand
 {
 public:
-    ~ListCMD();
-    ListCMD(QStringList params);
+    ~manCMD();
+    manCMD(QStringList params);
     void execute(Ui::MainWindow *mainWindow);
 private:
-    void traversepath(Ui::MainWindow* window,const char* path);
+    void DisplayManual(Ui::MainWindow* window,const char* command);
 
 };
-#endif // LSCMD
+
+
+
+
+
+#endif // MANCMD
+

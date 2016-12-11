@@ -1,98 +1,63 @@
 #include "mail.h"
 
-mail::mail()
+/*
+ * No parameter constructor for mail object
+ */
+Mail::Mail()
 {
     setFrom("");
     setTo("");
     setCC("");
-    setBCC("");
-    setSubject("");
-    setBody("");
-
-}
-
-mail::mail(string From, string To){
-    setFrom(From);
-    setTo(To);
-    setCC("");
-    setBCC("");
     setSubject("");
     setBody("");
 }
 
-mail::mail(string From, string To, string Body){
-    setFrom(From);
-    setTo(To);
-    setCC("");
-    setBCC("");
-    setSubject("");
-    setBody(Body);
 
-}
-
-mail::mail(string From, string To, string Subject, string Body){
-    setFrom(From);
-    setTo(To);
-    setCC("");
-    setBCC("");
-    setSubject(Subject);
-    setBody(Body);
-}
-
-mail::mail(string From, string To, string CC, string BCC, string Subject, string Body){
-
+Mail::Mail(string From, string To, string Subject, string Body,string CC){
     setFrom(From);
     setTo(To);
     setCC(CC);
-    setBCC(BCC);
     setSubject(Subject);
     setBody(Body);
 }
 
-string mail::getFrom(){
+string Mail::getFrom(){
     return from;
 }
 
-string mail::getTo(){
+string Mail::getTo(){
     return to;
 }
 
-string mail::getCC(){
+string Mail::getCC(){
     return cc;
 }
 
-string mail::getBCC(){
-    return bcc;
-}
-
-string mail::getSubject(){
+string Mail::getSubject(){
     return subject;
 }
 
-string mail::getBody(){
+string Mail::getBody(){
     return body;
 }
 
-void mail::setFrom(string From){
+void Mail::setFrom(string From){
     from=From;
 }
 
-void mail::setTo(string To){
+void Mail::setTo(string To){
     to=To;
 }
 
-void mail::setCC(string CC){
+void Mail::setCC(string CC){
     cc=CC;
 }
-void mail::setBCC(string BCC){
-    bcc=BCC;
-}
 
-void mail::setSubject(string Subject){
+void Mail::setSubject(string Subject){
     subject=Subject;
 }
 
-void mail::setBody(string Body){
+void Mail::setBody(string Body){
     body=Body;
 }
 

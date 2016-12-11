@@ -10,12 +10,14 @@ public :
     }
     virtual void execute(Ui::MainWindow *window)=0;
     virtual ~ICommand(){}
+    static inline void printTerm(Ui::MainWindow* window,QString str,QString color="lime"){
+            QString text = "";
+            text.append("<span style=\"color:").append(color).append(";\">").append(str).append("</span><br>");
+            window->terminalScreen->insertHtml(text);
+    }
     QStringList mParams;
 private:
 
 };
-
-
-
 
 #endif // ICommand_H

@@ -26,11 +26,25 @@ class INVALID_COMMAND_EXCEPTION : public exception{
 public:
     virtual const char* what() const throw()
       {
-        return "EXCEPTION -> INVALID_COMMAND\n";
+        return "Invalid Command. Please look help manual. -> help\n";
       }
 };
 
+class DIR_EXIST_EXCEPTION : public exception{
+public:
+    virtual const char* what() const throw()
+      {
+        return "Directory already exist!";
+      }
+};
 
+class FILE_EXIST_EXCEPTION : public exception{
+public:
+    virtual const char* what() const throw()
+      {
+        return "File already exist!";
+      }
+};
 
 
 #endif // GTUEXCEPTIONS_H

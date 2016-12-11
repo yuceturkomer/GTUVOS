@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>495</height>
+    <width>695</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,6 +21,25 @@
     <bool>false</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QLineEdit" name="inputBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="maxLength">
+       <number>100</number>
+      </property>
+      <property name="placeholderText">
+       <string>Command is here:</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QTextBrowser" name="terminalScreen">
       <property name="autoFillBackground">
@@ -47,25 +66,6 @@ p, li { white-space: pre-wrap; }
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLineEdit" name="inputBox">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="maxLength">
-       <number>100</number>
-      </property>
-      <property name="placeholderText">
-       <string>Command is here:</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>

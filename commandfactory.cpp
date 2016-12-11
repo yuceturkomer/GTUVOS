@@ -1,11 +1,5 @@
 #include "commandfactory.h"
-#include "gtuexceptions.h"
-#include "copycmd.h"
-#include "mailcmd.h"
-#include "helpcmd.h"
-#include "gtuvos.h"
-#include "exitcmd.h"
-#include "lscmd.h"
+
 #include <QApplication>
 
 CommandFactory *CommandFactory::instance=NULL;
@@ -28,14 +22,20 @@ ICommand* CommandFactory::getCommand(QString str){
     if(command.compare("cp")==0){
         cmd = new CopyCMD(parses);
     }else if (command.compare("mail")==0){
-        cmd = new MailCMD(parses);
+        QStringList mailParses =parseMailCMD(str);
+        cmd = new MailCMD(mailParses);
     }else if (command.compare("help")==0){
         cmd = new HelpCMD(parses);
     }else if (command.compare("exit")==0){
         cmd = new ExitCMD(parses);
     }else if(command.compare("ls")==0){
         cmd = new ListCMD(parses);
-    }else throw INVALID_COMMAND_EXCEPTION();
+    }else if(command.compare("mkdir")==0){
+        cmd = new MkdirCMD(parses);
+    }else if(command.compare("touch")==0){
+        cmd=new TouchCMD(parses);
+    }
+    else throw INVALID_COMMAND_EXCEPTION();
 
     return cmd;
 }
@@ -70,3 +70,21 @@ QStringList CommandFactory::parseStr(QString str){
  * @return If it's an available command returns true, else returns false.
  *
  */
+
+QStringList CommandFactory::parseMailCMD(QString str){
+    cout<<"CommandFactory::parseMailCMD, str:"<<str.toStdString()<<endl;
+
+    // mail send "to to to" "tit le le le" "sub sub sub sub"
+    QStringList mailTkn = str.split("\"",QString::SkipEmptyParts);
+    QString cmd = mailTkn[0];
+    QStringList tokens = cmd.split(" ",QString::SkipEmptyParts);
+    if(mailTkn.size()==6){
+        tokens.append(mailTkn[1]);
+        tokens.append(mailTkn[3]);
+        tokens.append(mailTkn[5]);
+    }
+    foreach (QString itr, tokens) {
+       cout<<"Token: "<<itr.toStdString()<<endl;
+    }
+    return tokens;
+}

@@ -47,6 +47,7 @@ const static int  TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY = -3;
 const static int  CREATED_FILE_DELETED_DURING_COPY_PROCESS = -4;
 const static int  LOCATION_OF_SOURCE_PATH_IN_STRING = 1;
 const static int  LOCATION_OF_TARGET_PATH_IN_STRING = 2;
+const static int  LOCATION_OF_BEHAVIOR_IN_STRING = 3;
 /**
  * End of the constant variables about CopyCMD Class
  */

@@ -22,7 +22,13 @@ SOURCES += main.cpp \
     mailcmd.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
+<<<<<<< HEAD
     lscmd.cpp
+>>>>>>> master
+=======
+    lscmd.cpp \
+    mkdircmd.cpp \
+    touchcmd.cpp
 >>>>>>> master
 
 RESOURCES += qml.qrc
@@ -54,7 +60,14 @@ HEADERS += \
     mailcmd.h \
     helpcmd.h \
     exitcmd.h \
+<<<<<<< HEAD
     lscmd.h
+>>>>>>> master
+=======
+    lscmd.h \
+    gtuexceptions.h \
+    mkdircmd.h \
+    touchcmd.h
 >>>>>>> master
 
 FORMS += \
