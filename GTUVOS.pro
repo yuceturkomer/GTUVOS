@@ -9,7 +9,11 @@ SOURCES += main.cpp \
     gtuvos.cpp \
     copycmd.cpp \
     commandfactory.cpp \
-<<<<<<< HEAD
+<<<<<<< HEAD \
+    helpcmd.cpp \
+    lscmd.cpp \
+    mailcmd.cpp \
+    exitcmd.cpp
     mailcmd.cpp \
     mail.cpp
 
@@ -36,7 +40,13 @@ HEADERS += \
     command.h \
     copycmd.h \
     commandfactory.h \
-<<<<<<< HEAD
+<<<<<<< HEAD \
+    mailcmd.h \
+    lscmd.h \
+    helpcmd.h \
+    gtuexceptions.h \
+    rapidxml.hpp \
+    rapidxml_utils.hpp
     mailcmd.h \
     mail.h
 =======
