@@ -9,22 +9,15 @@ SOURCES += main.cpp \
     gtuvos.cpp \
     copycmd.cpp \
     commandfactory.cpp \
-<<<<<<< HEAD \
-    helpcmd.cpp \
     lscmd.cpp \
-    mailcmd.cpp \
-    exitcmd.cpp
-    mailcmd.cpp \
-    mail.cpp
-
-=======
     mail.cpp \
     mailcmd.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
-    lscmd.cpp \
     mkdircmd.cpp \
-    touchcmd.cpp
+    touchcmd.cpp \
+    mancmd.cpp\
+
 
 RESOURCES += qml.qrc
 
@@ -41,16 +34,6 @@ HEADERS += \
     command.h \
     copycmd.h \
     commandfactory.h \
-<<<<<<< HEAD \
-    mailcmd.h \
-    lscmd.h \
-    helpcmd.h \
-    gtuexceptions.h \
-    rapidxml.hpp \
-    rapidxml_utils.hpp
-    mailcmd.h \
-    mail.h
-=======
     mail.h \
     mailcmd.h \
     helpcmd.h \
@@ -58,8 +41,17 @@ HEADERS += \
     lscmd.h \
     gtuexceptions.h \
     mkdircmd.h \
-    touchcmd.h
+    touchcmd.h \
+    mancmd.h \
+    rapidxml_utils.hpp \
+    rapidxml.hpp
 
 FORMS += \
     mainwindow.ui \
     mailserver.ui
+
+DISTFILES += \
+    GTUVOS.pro.user \
+    Manuel \
+    traverseCommand \
+    readme.md

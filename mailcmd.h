@@ -1,7 +1,7 @@
 #ifndef MAILCMD_H
 #define MAILCMD_H
 #include <QApplication>
-#include <Vector>
+#include <vector>
 #include "gtuvos.h"
 #include "command.h"
 #include"rapidxml.hpp"

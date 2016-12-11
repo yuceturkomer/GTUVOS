@@ -71,7 +71,7 @@ public:
         return MAILSERVERPATH;
     }
 
-    void addDraft(mail newMail){ draftMail.push_back(newMail);};
+    void addDraft(Mail newMail){ draftMail.push_back(newMail);};
     const string getMailFileName() const{
         return MAILFILENAME;
     }

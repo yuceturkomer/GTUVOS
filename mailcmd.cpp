@@ -6,6 +6,8 @@
 #include <QApplication>
 #include "gtuvos.h"
 #include "mail.h"
+#include "rapidxml.hpp"
+#include "rapidxml_utils.hpp"
 
 using namespace std;
 
@@ -85,7 +87,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
 
 void MailCMD::readMailFile(string fileName){
-
+/*
 	xml_document<> doc;
 	xml_node<> * root_node;
 	// Read the xml file into a vector
@@ -136,9 +138,9 @@ for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_no
 	    //}
 	    
 	    cout<<endl<<endl;
-	}
-		mails.push_back(tempMail);
-
+        mails.push_back(tempMail);
+    }
+*/
 }
 
 void MailCMD::writeToFile(){
@@ -147,14 +149,13 @@ void MailCMD::writeToFile(){
 
   mailArchive.open("sendMail.xml",std::ios_base::out);
 
-  mailArchive<<"<?xml version="1.0"? encoding="utf-8"?>\n<sentMail>\n";
+  mailArchive<<"<?xml version=\"1.0\"? encoding=\"utf-8\"?>\n<sentMail>\n";
 
            for(int i=0;i<mails.size();i++){
                mailArchive<<"<email>"<<endl<<"\t"
                          <<"<from>"<<mails.at(i).getFrom()<<"</from>"<<endl<<"\t"
                          <<"<to>"<<mails.at(i).getTo()<<"</to>"<<endl<<"\t"
                          <<"<cc>"<<mails.at(i).getCC()<<"</cc>"<<endl<<"\t"
-                        <<"<bcc>"<<mails.at(i).getBCC()<<"</bcc>"<<endl<<"\t"
                         <<"<subject>"<<mails.at(i).getSubject()<<"</subject>"<<endl<<"\t"
                         <<"<body>"<<mails.at(i).getBody()<<"</body>"<<endl
                        <<"</email>"<<endl;
