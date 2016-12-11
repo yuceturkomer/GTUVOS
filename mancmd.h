@@ -5,6 +5,7 @@
 #include <QApplication>
 #include "command.h"
 #include <string>
+#include "gtuexceptions.h"
 
 #include <iostream>
 #include <sys/sendfile.h>  // sendfile
@@ -16,14 +17,14 @@
 
 using namespace  std;
 
-class manCMD : public ICommand
+class ManCMD : public ICommand
 {
 public:
-    ~manCMD();
-    manCMD(QStringList params);
+    ~ManCMD();
+    ManCMD(QStringList params);
     void execute(Ui::MainWindow *mainWindow);
 private:
-    void DisplayManual(Ui::MainWindow* window,const char* command);
+    void DisplayManual(Ui::MainWindow* window);
 
 };
 

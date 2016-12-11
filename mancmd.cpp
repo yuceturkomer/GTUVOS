@@ -10,47 +10,36 @@
 #include <stdio.h>
 #include <string.h>
 
-manCMD::~manCMD(){
+ManCMD::~ManCMD(){
 }
 
-manCMD::manCMD(QStringList params):ICommand(params)
+ManCMD::ManCMD(QStringList params):ICommand(params)
 {
     cout<<"Man command consturcted"<<endl;
 }
-void manCMD::execute(Ui::MainWindow* window){
+void ManCMD::execute(Ui::MainWindow* window){
     if(mParams.size()==1){
         char path[255];
         getcwd(path,255);
         printTerm(window,"Invalid command");
         printTerm(window,"Usage: man [command]");
-        DisplayManual(window,path);
     }else if(mParams.size()==2){
-        printTerm(window,"Command: "+mParams[1]);
-        DisplayManual(window,mParams[1].toStdString().c_str());
-    }
+        printTerm(window,"Manual: "+mParams[1]);
+        DisplayManual(window);
+    }else throw INSUFFICIENT_PARAMS_EXCEPTION();
 }
 
-void manCMD::DisplayManual(Ui::MainWindow* window,const char* command){
+void ManCMD::DisplayManual(Ui::MainWindow* window){
 //will be implement
 
     QString piece = mParams[1];
 
     if(piece.compare("ls")==0){
-
-        //printTerm(window,"LS good ");
-
-    }else if(piece.compare("ls")==0){
-
-        //will implement
-
-    } else if(piece.compare("ls")==0){
-
-
-
-    }else if(piece.compare("ls")==0){
-
-
-
+        printTerm(window,"- list directory contents","green");
+    }else if(piece.compare("mkdir")==0){
+        printTerm(window,"- make directories","green");
+    }else if(piece.compare("man")==0){
+        printTerm(window,"- an interface to the on-line reference manuals","green");
     }
 
 
