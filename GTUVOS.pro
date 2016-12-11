@@ -1,7 +1,9 @@
 TEMPLATE = app
 
 QT += qml quick widgets
-CONFIG += c++11
+CONFIG +=\
+   c++11\
+   precompile_header
 
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -9,27 +11,13 @@ SOURCES += main.cpp \
     gtuvos.cpp \
     copycmd.cpp \
     commandfactory.cpp \
-<<<<<<< HEAD \
-    helpcmd.cpp \
-    lscmd.cpp \
-    mailcmd.cpp \
-    exitcmd.cpp
-    mailcmd.cpp \
-    mail.cpp
-
-=======
     mail.cpp \
     mailcmd.cpp \
     helpcmd.cpp \
     exitcmd.cpp \
-<<<<<<< HEAD
-    lscmd.cpp
->>>>>>> master
-=======
     lscmd.cpp \
     mkdircmd.cpp \
     touchcmd.cpp
->>>>>>> master
 
 RESOURCES += qml.qrc
 
@@ -39,6 +27,9 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
+PRECOMPILED_HEADER += \
+    precompiledxml.h
+
 HEADERS += \
     mailserver.h \
     mainwindow.h \
@@ -46,29 +37,15 @@ HEADERS += \
     command.h \
     copycmd.h \
     commandfactory.h \
-<<<<<<< HEAD \
-    mailcmd.h \
-    lscmd.h \
-    helpcmd.h \
-    gtuexceptions.h \
-    rapidxml.hpp \
-    rapidxml_utils.hpp
-    mailcmd.h \
-    mail.h
-=======
     mail.h \
     mailcmd.h \
     helpcmd.h \
     exitcmd.h \
-<<<<<<< HEAD
-    lscmd.h
->>>>>>> master
-=======
     lscmd.h \
     gtuexceptions.h \
     mkdircmd.h \
-    touchcmd.h
->>>>>>> master
+    touchcmd.h \
+    precompiledxml.h
 
 FORMS += \
     mainwindow.ui \
