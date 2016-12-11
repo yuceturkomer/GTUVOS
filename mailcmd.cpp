@@ -30,12 +30,6 @@ void MailCMD::execute(Ui::MainWindow *window){
            return;
        }
 
-//       QString log="";
-//       log.append("\tTO: ").append(mParams[2]).append("\n");
-//       log.append("\tTITTLE: ").append(mParams[3]).append("\n");
-//       log.append("\tMAIL: ").append(mParams[4]).append("\n");
-//       cout<<"MailSent log:"<<log<<endl;
-
        Mail newMail;
 
        newMail.setFrom("admin@gtuvos.edu.tr");
@@ -68,24 +62,12 @@ void MailCMD::execute(Ui::MainWindow *window){
    }else{
        ICommand::printTerm(window,"Invalid mail action. Please use help manual","red");
    }
-/*
-   ofstream sendMailFileArchive;
-   sendMailFileArchive.open("sendMail.xml",std::ios_base::app);
-   sendMailFileArchive<<"<email>"<<endl<<"\t"
-              <<"<from>"<<newMail.getFrom()<<"</from>"<<endl<<"\t"
-              <<"<to>"<<newMail.getTo()<<"</to>"<<endl<<"\t"
-              <<"<cc>"<<newMail.getCC()<<"</cc>"<<endl<<"\t"
-             <<"<bcc>"<<newMail.getBCC()<<"</bcc>"<<endl<<"\t"
-             <<"<subject>"<<newMail.getSubject()<<"</subject>"<<endl<<"\t"
-             <<"<body>"<<newMail.getBody()<<"</body>"<<endl
-            <<"</email>"<<endl<<endl<<endl;
-*/
 
 }
 
 
 void MailCMD::readMailFile(string fileName){
-/*
+
 	xml_document<> doc;
 	xml_node<> * root_node;
 	// Read the xml file into a vector
