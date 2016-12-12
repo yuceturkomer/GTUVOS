@@ -103,12 +103,12 @@ void CopyCMD::execute(Ui::MainWindow *mainWindow){
             // If path not exist or not a file
             else if (resultOfCopyFile == FILE_PATH_NOT_EXIST_OR_NOT_A_FILE)
             {
-                printTerm(mainWindow,"FilePath is not exist or is not a file name.","red");  // Print error message
+                printTerm(mainWindow,"FilePath does not exist or is not a file name.","red");  // Print error message
             }
             // If target path not exist or not a directory
             else if (resultOfCopyFile == TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY)
             {
-                printTerm(mainWindow,"TargetPath is not exist or is not a directory name.","red");  // Print error message
+                printTerm(mainWindow,"TargetPath does not exist or is not a directory name.","red");  // Print error message
             }
             // If created file deleted during copy process
             else if (resultOfCopyFile == CREATED_FILE_DELETED_DURING_COPY_PROCESS)
@@ -151,20 +151,25 @@ void CopyCMD::execute(Ui::MainWindow *mainWindow){
 int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyExists, string* theNameOfTheCopyFileCreated){
 
     // Check is filePath a file name?
-    if(!isItAFile(filePath) || isItADirectory(filePath))
+    if(!isItAFile(filePath) || isItADirectory(filePath)){
+        cout<<"FILE_PATH_NOT_EXIST_OR_NOT_A_FILE"<<endl;
         return FILE_PATH_NOT_EXIST_OR_NOT_A_FILE;
+    }
 
     // Check is targetPath a directory name?
-    if(!isItADirectory(targetPath))
+    if(!isItADirectory(targetPath)){
+        cout<<"TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY"<<endl;
         return TARGET_PATH_NOT_EXIST_OR_NOT_A_DIRECTORY;
+    }
 
     // Open the source file
     int source = open(filePath.c_str(), O_RDONLY, 0);
 
     // If filePath didn't open
-    if(source < SUCCESS_STATUS)
+    if(source < SUCCESS_STATUS){
+        cout<<"FILE_PATH_NOT_EXIST_OR_NOT_A_FILE"<<endl;
         return FILE_PATH_NOT_EXIST_OR_NOT_A_FILE;
-
+    }
 
     // Make a file name which will created
     string nameOfFile;
@@ -182,8 +187,10 @@ int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyEx
 
          switch(ifTheFileAlreadyExists){
             case IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING  :
-                    return IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING;
-
+            {
+                cout<<"IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING"<<endl;
+                return IF_THE_FILE_ALREADY_EXISTS_DO_NOTHING;
+            }
             case IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME  :
                 {
                     // close dest
@@ -199,18 +206,22 @@ int CopyCMD::copyFile(string filePath, string targetPath, int ifTheFileAlreadyEx
                     int dest = open(pathOfTheFileToBeCopied.c_str(), O_WRONLY | O_CREAT, 0644);
 
                     // Copy file
-                    if(!copyFromSourceFileToDestinationFile(source,dest))
+                    if(!copyFromSourceFileToDestinationFile(source,dest)){
+                        cout<<"FAIL_COPY_FILE"<<endl;
                         return FAIL_COPY_FILE;  //if copy file fails
+                    }
 
                     // make the file name which will created
                     theNameOfTheCopyFileCreated->clear();
                     theNameOfTheCopyFileCreated->append(nameOfFile);
 
                     // if the created file was deleted during the process then return CREATED_FILE_DELETED_DURING_COPY_PROCESS.
-                    if(!isItAFile(pathOfTheFileToBeCopied))
+                    if(!isItAFile(pathOfTheFileToBeCopied)){
+                        cout<<"CREATED_FILE_DELETED_DURING_COPY_PROCESS"<<endl;
                         return CREATED_FILE_DELETED_DURING_COPY_PROCESS;
-
-                    return  IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME;
+                    }
+                    cout<<"IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME"<<endl;
+                    return IF_THE_FILE_ALREADY_EXISTS_CHANGE_FILE_NAME;
                     break;
                 }
 
