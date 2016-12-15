@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     lscmd.cpp \
     mkdircmd.cpp \
     touchcmd.cpp \
-    mancmd.cpp
+    mancmd.cpp \
+    clearcmd.cpp
 
 
 RESOURCES += qml.qrc
@@ -48,7 +49,8 @@ HEADERS += \
     mkdircmd.h \
     touchcmd.h \
     precompiledxml.h \
-    mancmd.h
+    mancmd.h \
+    clearcmd.h
 
 FORMS += \
     mainwindow.ui \

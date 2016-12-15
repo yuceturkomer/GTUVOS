@@ -40,6 +40,10 @@ void ManCMD::DisplayManual(Ui::MainWindow* window){
         printTerm(window,"- make directories","green");
     }else if(piece.compare("man")==0){
         printTerm(window,"- an interface to the on-line reference manuals","green");
+    }else if(piece.compare("clear")==0){
+        printTerm(window,"- clears the screen.","green");
+    }else if(piece.compare("touch")==0){
+        printTerm(window,"- creates an empty new file.","green");
     }
 
 

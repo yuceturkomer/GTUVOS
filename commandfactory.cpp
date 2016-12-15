@@ -36,6 +36,8 @@ ICommand* CommandFactory::getCommand(QString str){
         cmd=new TouchCMD(parses);
     }else if(command.compare("man")==0){
         cmd=new ManCMD(parses);
+    }else if(command.compare("clear")==0){
+        cmd=new ClearCMD(parses);
     }
     else throw INVALID_COMMAND_EXCEPTION();
 

@@ -5,5 +5,17 @@
 
 **GTU Virtual Operating System**
 
+The available commands are:
++ clear
++ cp(copyfile)
++ exit
++ help
++ ls
++ mail list
++ mail send
++ man
++ mkdir
++ touch
+  
 Enviroments: 
 1.Qt Creator, 5.7
