@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :QMainWindow(parent),ui(new Ui::MainWind
     double version = GTUVOS::getInstance()->getVersion();
     QString name = QString::fromStdString(GTUVOS::getInstance()->getName());    
 
-    ICommand::printTerm(ui,"Welcome to" +name+"\n");
+    ICommand::printTerm(ui,"Welcome to " +name+"\n");
     ICommand::printTerm(ui,"Version "+QString::number(version)+"\n");
     ICommand::printTerm(ui,"Write 'help' to see all commands""\n");
     ICommand::printTerm(ui,"~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-");

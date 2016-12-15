@@ -12,6 +12,7 @@
 #include "mkdircmd.h"
 #include "touchcmd.h"
 #include "mancmd.h"
+#include "clearcmd.h"
 
 class CommandFactory
 {

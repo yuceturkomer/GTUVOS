@@ -16,6 +16,14 @@ HelpCMD::HelpCMD(QStringList params):ICommand(params)
 }
 
 void HelpCMD::execute(Ui::MainWindow *mainWindow){
+    cout<<"Help execute started."<<endl;
+
+    if(mParams.size()!=1){
+        printTerm(mainWindow,"Invalid help parameter","red");
+        printTerm(mainWindow,"Help command no use parameter","DeepSkyBlue");
+        return;
+    }
+
     // Information for running the command
     printTerm(mainWindow,"<p style=\"white-space:pre;\">--- Help Manual ---</p>","lime");
     printTerm(mainWindow,"<p style=\"white-space:pre;\">The available commands are:</p>","lime");
@@ -26,5 +34,7 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
                          " - ls - path (path is optional)<br>"
                          " - touch path<br>"
                          " - mkdir path<br>"
+                         " - man command<br>"
+                         " - clear<br>"
                          " - exit</p><br>","DeepSkyBlue");
 }
