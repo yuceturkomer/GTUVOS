@@ -50,7 +50,9 @@ HEADERS += \
     touchcmd.h \
     precompiledxml.h \
     mancmd.h \
-    clearcmd.h
+    clearcmd.h \
+    rapidxml_utils.hpp \
+    rapidxml.hpp
 
 FORMS += \
     mainwindow.ui \
