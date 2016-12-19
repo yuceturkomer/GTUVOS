@@ -2,6 +2,10 @@
 #define MAILCMD_H
 #include <QApplication>
 #include <vector>
+#include <QFile>
+#include <QTextStream>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 #include "gtuvos.h"
 #include "command.h"
 #include "precompiledxml.h"
@@ -14,11 +18,11 @@ public:
     MailCMD(QStringList str);
     ~MailCMD();
     void execute(Ui::MainWindow *window);
-    void readMailFile(string fileName);
-    void writeToFile();
-private:
-    vector<Mail> mails;
-    vector<Mail> sendMail;
+    bool readMailFile(string fileName, vector<Mail>&);
+    void writeToFile(vector<Mail>);
+//private:
+//    vector<Mail> mails;
+//    vector<Mail> sendMail;
 };
 
 #endif // MAILCMD_H
