@@ -34,13 +34,6 @@ void MailCMD::execute(Ui::MainWindow *window){
            return;
        }
 
-//       QString log="";
-//       log.append("\tTO: ").append(mParams[2]).append("\n");
-//       log.append("\tTITTLE: ").append(mParams[3]).append("\n");
-//       log.append("\tMAIL: ").append(mParams[4]).append("\n");
-//       cout<<"MailSent log:"<<log<<endl;
-
-
        newMail.setFrom("admin@gtuvos.edu.tr");
        newMail.setTo(mParams[2].toStdString());
        newMail.setSubject(mParams[3].toStdString());
@@ -48,9 +41,6 @@ void MailCMD::execute(Ui::MainWindow *window){
        newMail.setCC("No CC");
 
        GTUVOS::getInstance()->getMailServer()->sendMail(newMail);
-//      sendMail.push_back(newMail);
-//      mails.push_back(newMail);
-
 
       writeToFile(GTUVOS::getInstance()->getMailServer()->getAllMails());
 
@@ -58,22 +48,30 @@ void MailCMD::execute(Ui::MainWindow *window){
        QString msg="Mail has been sent to: ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
-       //cout<<mails.size()<<endl;
+
+
+
    }else if(mParams[1].compare("list")==0){
     bool status;
 
     vector<Mail> mailto = GTUVOS::getInstance()->getMailServer()->getAllMails();
+    vector<Mail> deneme;
+
+    status=readMailFile("~/build-GTUVOS-Desktop_Qt_5_5_1_GCC_64bit3-Debug/sendMail.xml", deneme);
+
+
 
        if(mailto.size()==0){
            ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","DeepSkyBlue");
        }
-        status=readMailFile("sendMail.xml", GTUVOS::getInstance()->getMailServer()->getAllMails());
+
 
         if(status == false && mailto.size() == 0){
             ICommand::printTerm(window,"No mail in archive!\n Send a mail first");
 
         }else{
-                for(unsigned int i=0;i!=mailto.size();++i){
+
+                for(unsigned int i=0;i!=deneme.size();++i){
                     QString mail="";
                     mail.append(QString::number(i)).append(". Mail:<br>");
                     mail.append("TO: ").append(QString::fromStdString(mailto[i].getTo())).append("<br>");
@@ -101,7 +99,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
 }
 
-bool MailCMD::readMailFile(string fileName,vector<Mail> mailList){
+bool MailCMD::readMailFile(string fileName,vector<Mail>& mailList){
 
     xml_document<> doc;
     xml_node<> * root_node;
@@ -165,24 +163,42 @@ for (xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_no
 
 void MailCMD::writeToFile(vector<Mail> mailList){
 
-  ofstream mailArchive;
+ const char* fname="sendMail.xml";
+ QString filename (fname);
 
-  mailArchive.open("sendMail.xml",std::ios_base::out);
+ QFile mailArchive(filename);
 
-  mailArchive<<"<?xml version=\"1.0\"? encoding=\"utf-8\"?>\n<sentMail>\n";
+  mailArchive.open(QIODevice::WriteOnly);
 
-           for(int i=0;i< mailList.size();i++){
-               mailArchive<<"<email>"<<endl<<"\t"
-                         <<"<from>"<<mailList[i].getFrom()<<"</from>"<<endl<<"\t"
-                         <<"<to>"<<mailList.at(i).getTo()<<"</to>"<<endl<<"\t"
+  QXmlStreamWriter mailFile(&mailArchive);
 
-                        <<"<subject>"<<mailList.at(i).getSubject()<<"</subject>"<<endl<<"\t"
-                        <<"<body>"<<mailList.at(i).getBody()<<"</body>"<<endl
-                       <<"</email>"<<endl;
-           }
+    mailFile.setAutoFormatting(true);
+    mailFile.writeStartDocument();
+    mailFile.writeStartElement("sentMail");
+        for(int i=0;i<mailList.size();i++){
+            mailFile.writeStartElement("email");
+            mailFile.writeTextElement("from",QString::fromStdString(mailList[i].getFrom()));
+            mailFile.writeTextElement("to",QString::fromStdString(mailList[i].getTo()));
+            mailFile.writeTextElement("body",QString::fromStdString(mailList[i].getBody()));
+            mailFile.writeEndElement();
+        }
 
-    mailArchive<<"</sentMail>\n";
-    mailArchive.close();
+        mailArchive.close();
+
+//  mailArchive<<"<?xml version=\"1.0\"? encoding=\"utf-8\"?>\n<sentMail>\n";
+
+//           for(int i=0;i< mailList.size();i++){
+//               mailArchive<<"<email>"<<endl<<"\t"
+//                         <<"<from>"<<mailList[i].getFrom()<<"</from>"<<endl<<"\t"
+//                         <<"<to>"<<mailList.at(i).getTo()<<"</to>"<<endl<<"\t"
+
+//                        <<"<subject>"<<mailList.at(i).getSubject()<<"</subject>"<<endl<<"\t"
+//                        <<"<body>"<<mailList.at(i).getBody()<<"</body>"<<endl
+//                       <<"</email>"<<endl;
+//           }
+
+//    mailArchive<<"</sentMail>\n";
+//    mailArchive.close();
 }
 
 
