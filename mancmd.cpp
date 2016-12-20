@@ -37,13 +37,20 @@ void ManCMD::DisplayManual(Ui::MainWindow* window){
     if(piece.compare("ls")==0){
         printTerm(window,"- list directory contents","green");
     }else if(piece.compare("mkdir")==0){
-        printTerm(window,"- make directories","green");
+        printTerm(window,"- creates new directories if not exist.","green");
+        printTerm(window,"- Example: mkdir tempDir","green");
     }else if(piece.compare("man")==0){
         printTerm(window,"- an interface to the on-line reference manuals","green");
+        printTerm(window,"- Example: man ls","green");
     }else if(piece.compare("clear")==0){
         printTerm(window,"- clears the screen.","green");
     }else if(piece.compare("touch")==0){
         printTerm(window,"- creates an empty new file.","green");
+    }else if(piece.compare("mail")==0){
+        printTerm(window,"- This command is used send and list mails. Mails are stored in .xml file","green");
+        printTerm(window,"- To send mail uses mail send command with additional paramters","green");
+        printTerm(window,"- Example send mail:   mail send \"to\"  \"title\" \"message\" ","green");
+        printTerm(window,"- Example list mails:  mail list","green");
     }
 
 
