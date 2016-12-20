@@ -43,7 +43,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        writeToFile(GTUVOS::getInstance()->getMailServer()->getAllMails());
 
-       QString msg="Mail has been sent to: ";
+       QString msg="Mail has been sent";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
 
@@ -144,6 +144,7 @@ void MailCMD::writeToFile(vector<Mail> mailList){
     mailFile.setAutoFormatting(true);
     mailFile.writeStartDocument();
     mailFile.writeStartElement("GTUVOSMAIL");
+
     for(int i=0;i<mailList.size();i++){
         mailFile.writeStartElement("email");
         mailFile.writeTextElement("from",QString::fromStdString(mailList[i].getFrom()));
@@ -152,7 +153,7 @@ void MailCMD::writeToFile(vector<Mail> mailList){
         mailFile.writeTextElement("body",QString::fromStdString(mailList[i].getBody()));
         mailFile.writeEndElement();
     }
-
+    mailFile.writeEndElement(); // end of GTUVOSMAIL
     mailArchive.close();
 
 }
