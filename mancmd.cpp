@@ -51,6 +51,10 @@ void ManCMD::DisplayManual(Ui::MainWindow* window){
         printTerm(window,"- To send mail uses mail send command with additional paramters","green");
         printTerm(window,"- Example send mail:   mail send \"to\"  \"title\" \"message\" ","green");
         printTerm(window,"- Example list mails:  mail list","green");
+    }else if(piece.compare("exit")==0){
+        printTerm(window,"- Turn off the GTU VIRTUAL OPERATING SYSTEM","green");
+    }else if(piece.compare("cp")==0){
+        printTerm(window,"- To be added later!!!","green");
     }
 
 
