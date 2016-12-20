@@ -20,6 +20,14 @@ public:
     string getSubject();
     string getBody();
 
+    friend std::ostream& operator<< (std::ostream& stream, const Mail& mail){
+        stream<<"Mail:"<<endl<<"From:"<<mail.from<<endl;
+        stream<<"TO:"<<mail.to<<endl;
+        stream<<"Subject:"<<mail.subject<<endl;
+        stream<<"Body:"<<mail.body<<endl;
+        return stream;
+    }
+
     void setFrom(string);
     void setTo(string);
     void setCC(string);
