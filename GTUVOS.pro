@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     mkdircmd.cpp \
     touchcmd.cpp \
     mancmd.cpp \
-    clearcmd.cpp
+    clearcmd.cpp \
+    net.cpp
 
 
 RESOURCES += qml.qrc
@@ -52,7 +53,8 @@ HEADERS += \
     mancmd.h \
     clearcmd.h \
     rapidxml_utils.hpp \
-    rapidxml.hpp
+    rapidxml.hpp \
+    net.h
 
 FORMS += \
     mainwindow.ui \
