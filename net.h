@@ -12,12 +12,16 @@ Q_OBJECT
   QNetworkAccessManager *getmanager;
   QNetworkAccessManager *putmanager;
 private slots:
-  void getIsFinished(QNetworkReply *);
+  void getIsFinished(QNetworkReply*);
   void putIsFinished(QNetworkReply *);
+  void saveFile();
 public:
   explicit Net(QObject *parent = 0);
 
   void SiteOperations(QString url, QString username="", QString password="", int port=-1);
+private:
+  QNetworkReply *reply;
+  QFile *file;
 };
 
 

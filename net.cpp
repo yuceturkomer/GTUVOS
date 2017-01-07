@@ -15,15 +15,29 @@ Net::Net(QObject *parent) : QObject(parent)
 
 }
 
-void Net::getIsFinished(QNetworkReply *reply)
+void Net::getIsFinished(QNetworkReply* reply)
 {
-    qDebug() << reply->readAll();
+    QByteArray arr = reply->readAll();
+    cerr << "Reply: "<<arr.toStdString();
     std::cout<<"Finished getting the stuff."<<std::endl;
 
 }
 void Net::putIsFinished(QNetworkReply *reply){
-    qDebug() << reply->readAll();
+    QByteArray bytes = reply->readAll();
+    QString str = QString::fromUtf8(bytes.data(), bytes.size());
+    qDebug()<<"PUT INFORMATION: "<<reply->error();
     std::cout<<"Finished putting the stuff."<<std::endl;
+}
+
+void Net::saveFile(){
+    cerr<<"SaveFile started\n";
+    QFile *file = new QFile("testf.txt");
+    if(!file->isOpen())
+            file->open(QIODevice::WriteOnly);
+     QByteArray bytes = reply->readAll();
+     QString str = QString::fromUtf8(bytes.data(), bytes.size());
+     qDebug()<<str;
+
 }
 
 /**
@@ -39,47 +53,49 @@ void Net::putIsFinished(QNetworkReply *reply){
 void Net::SiteOperations(QString url, QString username, QString password, int port)
 {
 
-    QUrl myurl(url);
-    myurl.setUserName(username);
-    myurl.setPassword(password);
-    if(port>=0)
-        myurl.setPort(port);
+    QUrl *myurl = new QUrl(url);
+    /*myurl->setHost(url);
+    myurl->setScheme("ftp");
+    myurl->setUserName(username);
+    myurl->setPassword(password);*/
+    std::cerr<<"URL: "<<myurl->toString().toStdString()<<"\n";
+    /*if(port>=0)
+        myurl.setPort(port);*/
 
 
-    getmanager = new QNetworkAccessManager(this);
-    getmanager->get(QNetworkRequest(myurl));
+    //getmanager = new QNetworkAccessManager();
 
-    connect(getmanager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(getIsFinished(QNetworkReply*)));
 
-    /*
+    QNetworkRequest req(*myurl);
+
+    putmanager = new QNetworkAccessManager(this);
+    connect(putmanager,SIGNAL(finished(QNetworkReply*)),
+            this,SLOT(putIsFinished(QNetworkReply*)));
+
+    /*reply = getmanager->get(req);
+
+    connect(reply, SIGNAL(readyRead()),
+            this, SLOT(saveFile()));
+*/
          // Bu kisimda file oluşturup açildi mi diye baktim, asil olay alt tarafta
-         FILE *fp = fopen("test.txt","w+r");
+         FILE *fp = fopen("test.txt","rw+");
          if(fp==NULL){
              std::cout << "File couldn't openededed"<<std::endl;
              return;
          }
 
-         QFile file;
 
-         if(file.open(fp, QIODevice::ReadWrite)){
-             std::cout<<"Dude, YES.."<<std::endl;
-             file.write("msg HEHEYT ahey");
-             QTextStream in(&file);
-             file.seek(0);
-             std::cout<<"File content first line ---> "<<in.readLine().toStdString()<<std::endl;
-         }
+        file = new QFile();
+         if(file->open(fp, QIODevice::ReadOnly)){
+             //file->write("file append test");
 
-        // Asil olay
-         putmanager = new QNetworkAccessManager(this);
-         putmanager->put(QNetworkRequest(testurl),&file);
-         connect(putmanager,SIGNAL(finished(QNetworkReply*)),
-                 this,SLOT(putIsFinished(QNetworkReply*)));
+         putmanager->put(req ,file);
+
 
          }
 
-        fclose(asdf); // Bunlar error verebiliyor dikkat. Verirse comment'e al
-        file.close(); // Bunlar error verebiliyor dikkat. Verirse comment'e al
-        */
+        /*fclose(fp); // Bunlar error verebiliyor dikkat. Verirse comment'e al
+        file.close(); // Bunlar error verebiliyor dikkat. Verirse comment'e al*/
+        std::cerr<<"end site operations\n";
 
 }
