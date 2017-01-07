@@ -26,6 +26,16 @@ void Net::putIsFinished(QNetworkReply *reply){
     std::cout<<"Finished putting the stuff."<<std::endl;
 }
 
+/**
+ * @brief Net::SiteOperations
+ *
+ * !!!! Simdilik sadece verilen URL'i html olarak çekiyor ve stderr'a bastiriyor !!
+ *
+ * @param url
+ * @param username
+ * @param password
+ * @param port
+ */
 void Net::SiteOperations(QString url, QString username, QString password, int port)
 {
 
@@ -42,5 +52,34 @@ void Net::SiteOperations(QString url, QString username, QString password, int po
     connect(getmanager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(getIsFinished(QNetworkReply*)));
 
+    /*
+         // Bu kisimda file oluşturup açildi mi diye baktim, asil olay alt tarafta
+         FILE *fp = fopen("test.txt","w+r");
+         if(fp==NULL){
+             std::cout << "File couldn't openededed"<<std::endl;
+             return;
+         }
+
+         QFile file;
+
+         if(file.open(fp, QIODevice::ReadWrite)){
+             std::cout<<"Dude, YES.."<<std::endl;
+             file.write("msg HEHEYT ahey");
+             QTextStream in(&file);
+             file.seek(0);
+             std::cout<<"File content first line ---> "<<in.readLine().toStdString()<<std::endl;
+         }
+
+        // Asil olay
+         putmanager = new QNetworkAccessManager(this);
+         putmanager->put(QNetworkRequest(testurl),&file);
+         connect(putmanager,SIGNAL(finished(QNetworkReply*)),
+                 this,SLOT(putIsFinished(QNetworkReply*)));
+
+         }
+
+        fclose(asdf); // Bunlar error verebiliyor dikkat. Verirse comment'e al
+        file.close(); // Bunlar error verebiliyor dikkat. Verirse comment'e al
+        */
 
 }
