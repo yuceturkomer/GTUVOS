@@ -36,5 +36,6 @@ void HelpCMD::execute(Ui::MainWindow *mainWindow){
                          " - mkdir path<br>"
                          " - man command<br>"
                          " - clear<br>"
-                         " - exit</p><br>","DeepSkyBlue");
+                         " - exit<br>"
+                         " - ftp URL username(opt) password(opt) port(opt)</p><br>","DeepSkyBlue");
 }

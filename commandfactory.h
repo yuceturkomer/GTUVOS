@@ -13,6 +13,7 @@
 #include "touchcmd.h"
 #include "mancmd.h"
 #include "clearcmd.h"
+#include "ftpcmd.h"
 
 class CommandFactory
 {
