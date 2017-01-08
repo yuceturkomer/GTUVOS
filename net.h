@@ -9,19 +9,25 @@
 class Net : public QObject
 {
 Q_OBJECT
-  QNetworkAccessManager *getmanager;
-  QNetworkAccessManager *putmanager;
+
+public:
+  explicit Net(QObject *parent = 0);
+  void setURL(QString url);
+  QUrl getURL();
+  void sendFileToFTP(QString fileName);
+
 private slots:
   void getIsFinished(QNetworkReply*);
   void putIsFinished(QNetworkReply *);
   void saveFile();
-public:
-  explicit Net(QObject *parent = 0);
 
-  void SiteOperations(QString url, QString username="", QString password="", int port=-1);
 private:
   QNetworkReply *reply;
-  QFile *file;
+  QFile file;
+  QUrl url;
+  QNetworkAccessManager *getmanager;
+  QNetworkAccessManager *putmanager;
+
 };
 
 
