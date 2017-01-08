@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include "gtuexceptions.h"
 
 class Net : public QObject
 {
@@ -15,6 +16,8 @@ public:
   void setURL(QString url);
   QUrl getURL();
   void sendFileToFTP(QString fileName);
+  QNetworkReply* getReply();
+  QString errorMessage;
 
 private slots:
   void getIsFinished(QNetworkReply*);
@@ -23,6 +26,7 @@ private slots:
 
 private:
   QNetworkReply *reply;
+
   QFile file;
   QUrl url;
   QNetworkAccessManager *getmanager;

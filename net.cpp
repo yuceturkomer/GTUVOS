@@ -25,10 +25,11 @@ void Net::getIsFinished(QNetworkReply* reply)
 
 }
 void Net::putIsFinished(QNetworkReply *reply){
-    QByteArray bytes = reply->readAll();
-    QString str = QString::fromUtf8(bytes.data(), bytes.size());
-    qDebug()<<"PUT INFORMATION: "<<reply->error();
-    std::cout<<"Finished putting the stuff."<<std::endl;
+    this->reply=reply;
+    errorMessage.append(reply->errorString());
+    /*QByteArray bytes = reply->readAll();
+    QString str = QString::fromUtf8(bytes.data(), bytes.size());*/
+    qDebug()<<"PUT STATUS: "<<errorMessage;
 }
 
 void Net::saveFile(){
@@ -49,10 +50,10 @@ QUrl Net::getURL(){
     return this->url;
 }
 
-/**
- * @brief Net::SiteOperations
- *
- */
+QNetworkReply* Net::getReply(){
+    return this->reply;
+}
+
 void Net::sendFileToFTP(QString fileName)
 {
 
@@ -66,8 +67,10 @@ void Net::sendFileToFTP(QString fileName)
     QNetworkRequest req(this->url);
 
     file.setFileName(fileName);
-    if(!file.exists())
+    if(!file.exists()){
+        std::cerr<<"here";
         throw FILE_PATH_EXCEPTION();
+    }
 
     if(file.open(QIODevice::ReadOnly)){
         putmanager->put(req ,&file);
@@ -75,6 +78,13 @@ void Net::sendFileToFTP(QString fileName)
 
     /*fclose(fp); // Bunlar error verebiliyor dikkat. Verirse comment'e al
     file.close(); // Bunlar error verebiliyor dikkat. Verirse comment'e al*/
-    std::cerr<<"end site operations\n";
+
+    QEventLoop loop;
+    connect(putmanager, SIGNAL(finished(QNetworkReply*)), &loop, SLOT(quit()));
+    loop.exec();
+
+    if(reply->error()!=QNetworkReply::NetworkError::NoError){
+        throw FTP_EXCEPTION();
+    }
 
 }
