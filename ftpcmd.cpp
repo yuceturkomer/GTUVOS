@@ -22,11 +22,15 @@ void ftpcmd::execute(Ui::MainWindow *window){
 
         netobj->setURL(url);
         qDebug()<<"FTP URL:"<<netobj->getURL();
+        QString str;
+        str.append("Working on: ").append("FTP URL:").append(netobj->getURL().toString());
+        ICommand::printTerm(window,str,"green");
         netobj->sendFileToFTP(mParams[2]);
         ICommand::printTerm(window,"Send file to FTP Successful","green");
-    }catch(exception *e){
-        ICommand::printTerm(window,QString::fromLatin1(e->what()),"red");
-        std::cerr<<"hello";
+    }catch(exception& e){
+        ICommand::printTerm(window,QString::fromLatin1(e.what()),"red");
+        ICommand::printTerm(window,netobj->errorMessage,"red");
+
     }
 
 }

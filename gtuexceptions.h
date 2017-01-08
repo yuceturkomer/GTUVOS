@@ -55,7 +55,7 @@ public:
     }*/
     virtual const char* what() const throw()
     {
-        return "FTP_EXCEPTION";
+        return "FTP_EXCEPTION_";
     }
 };
 

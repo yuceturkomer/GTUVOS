@@ -68,7 +68,6 @@ void Net::sendFileToFTP(QString fileName)
 
     file.setFileName(fileName);
     if(!file.exists()){
-        std::cerr<<"here";
         throw FILE_PATH_EXCEPTION();
     }
 
