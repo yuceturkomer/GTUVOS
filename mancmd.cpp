@@ -35,26 +35,39 @@ void ManCMD::DisplayManual(Ui::MainWindow* window){
     QString piece = mParams[1];
 
     if(piece.compare("ls")==0){
-        printTerm(window,"- list directory contents","green");
+        printTerm(window,"- List directory contents.","green");
+        printTerm(window,"- Example ls:   ls /path","green");
     }else if(piece.compare("mkdir")==0){
-        printTerm(window,"- creates new directories if not exist.","green");
-        printTerm(window,"- Example: mkdir tempDir","green");
+        printTerm(window,"- Creates new directories if not exist.","green");
+        printTerm(window,"- Example: mkdir /tempDir","green");
     }else if(piece.compare("man")==0){
-        printTerm(window,"- an interface to the on-line reference manuals","green");
+        printTerm(window,"- An interface to the on-line reference manuals.","green");
         printTerm(window,"- Example: man ls","green");
     }else if(piece.compare("clear")==0){
-        printTerm(window,"- clears the screen.","green");
+        printTerm(window,"- Clears the screen.","green");
+        printTerm(window,"- Example: clear","green");
     }else if(piece.compare("touch")==0){
-        printTerm(window,"- creates an empty new file.","green");
+        printTerm(window,"- Creates an empty new file if not exist.","green");
+        printTerm(window,"- Example: touch /tempFile","green");
     }else if(piece.compare("mail")==0){
-        printTerm(window,"- This command is used send and list mails. Mails are stored in .xml file","green");
-        printTerm(window,"- To send mail uses mail send command with additional paramters","green");
+        printTerm(window,"- This command is used send and list mails. Mails are stored in .xml file.","green");
+        printTerm(window,"- To send mail uses mail send command with additional paramters.","green");
         printTerm(window,"- Example send mail:   mail send \"to\"  \"title\" \"message\" ","green");
         printTerm(window,"- Example list mails:  mail list","green");
     }else if(piece.compare("exit")==0){
-        printTerm(window,"- Turn off the GTU VIRTUAL OPERATING SYSTEM","green");
+        printTerm(window,"- Turn off the GTU VIRTUAL OPERATING SYSTEM.","green");
+        printTerm(window,"- Example: exit","green");
     }else if(piece.compare("cp")==0){
-        printTerm(window,"- To be added later!!!","green");
+        printTerm(window,"- Copy the given file to the target path.","green");
+        printTerm(window,"- Example cp:   cp /sourceDir/example.txt /targetDir","green");
+    }else if(piece.compare("help")==0){
+        printTerm(window,"- Write all available commands.","green");
+        printTerm(window,"- Example: help","green");
+    }else if(piece.compare("ftp")==0){
+        printTerm(window,"- The File Transfer Protocol (FTP) is a standard network protocol used to transfer computer files between a client and server on a computer network.","green");
+        printTerm(window,"- Example ftp:   ftp hmenn:hm2@159.203.133.30/vos/test.txt test.txt","green");
+    }else {
+        printTerm(window,"- Command not available.","red");
     }
 
 

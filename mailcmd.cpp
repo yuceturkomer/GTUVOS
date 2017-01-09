@@ -43,7 +43,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        writeToFile(GTUVOS::getInstance()->getMailServer()->getAllMails());
 
-       QString msg="Mail has been sent";
+       QString msg="Mail has been sent to";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
 
