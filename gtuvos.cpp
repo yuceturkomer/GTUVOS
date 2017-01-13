@@ -22,7 +22,7 @@ GTUVOS::~GTUVOS(){
 
 GTUVOS::GTUVOS(){
     name = "GTU Virtual OS";
-    version = 2.2;
+    version = 3.3;
 
     prepareSystem();
 
