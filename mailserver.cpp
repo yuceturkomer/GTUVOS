@@ -14,8 +14,7 @@
 */
 MailServer::MailServer()
 {
-    string path = checkMailServerDirectory();
-    checkMailArchiveFile(path);
+    checkMailArchiveFile(MAILFILENAME);
     cout<<"Mail Server constucted"<<endl;
 }
 
@@ -51,30 +50,6 @@ void MailServer::sendMail(Mail mail){
 }
 
 /**
- * Check the MailServer directory
- *
- * -Check the MailServer directory which is called "MailServer".
- * "MailServer" directory is in the our source directory which is called "GTUVOSROOT"
- * if the "MailServer" directory doesn't exist then create it.
- * @return mail server directory path
- */
-string MailServer::checkMailServerDirectory(){
-
-    string path = ".GTUVOSROOT";
-    path.append("/").append(getMailServerPath());
-
-    QDir root(QString::fromStdString(path));
-    if(root.exists()){
-        cout<<"Mail Directory exist."<<endl;
-    }else{
-        root.mkpath(".");
-        cout<<"Mail Directory created!"<<endl;
-    }
-
-    return path;
-}
-
-/**
  * Check the mailArchive file
  *
  * -Set mailArchiveFileName
@@ -86,9 +61,7 @@ string MailServer::checkMailServerDirectory(){
  */
 string MailServer::checkMailArchiveFile(string path){
 
-    string temp = path;
-    path.append("/").append(getMailFileName());
-    QFile mailFile(QString::fromStdString(temp));
+    QFile mailFile(QString::fromStdString(path));
     if(mailFile.exists()){
         cout<<"Mail file exist."<<endl;
     }else{
@@ -96,7 +69,7 @@ string MailServer::checkMailArchiveFile(string path){
         cout<<"Mail file created!"<<endl;
     }
 
-    return temp;
+    return path;
 }
 
 vector<Mail> MailServer::getAllMails() const{

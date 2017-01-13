@@ -43,7 +43,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
        writeToFile(GTUVOS::getInstance()->getMailServer()->getAllMails());
 
-       QString msg="Mail has been sent to";
+       QString msg="Mail has been sent to ";
        msg.append(QString::fromStdString(newMail.getTo()));
        ICommand::printTerm(window,msg,"LawnGreen");
 
@@ -53,7 +53,7 @@ void MailCMD::execute(Ui::MainWindow *window){
 
     vector<Mail> mails;
 
-    status=readMailFile("./sendMail.xml", mails);
+    status=readMailFile(".GTUVOSROOT/mailBackup.xml", mails);
 
     if(mails.size()==0){
         ICommand::printTerm(window,"There is no mail!\nTo send a mail, use mail send command.","DeepSkyBlue");
@@ -82,7 +82,7 @@ bool MailCMD::readMailFile(string fileName,vector<Mail>& mailList){
     qDebug("readMailFile debug");
 
     xml_document<> doc;
-    xml_node<> * root_node;
+    xml_node<> * root_node=NULL;
 
     // Read the xml file into a vector
     ifstream theFile(fileName);
@@ -93,6 +93,8 @@ bool MailCMD::readMailFile(string fileName,vector<Mail>& mailList){
     doc.parse<0>(&buffer[0]);
     // Find our root node
     root_node = doc.first_node("GTUVOSMAIL");
+    if(root_node==NULL)
+        return false;
     if(theFile.is_open()){
         for(xml_node<> * mail_node = root_node->first_node("email"); mail_node; mail_node = mail_node->next_sibling()){
             Mail mail;
@@ -133,7 +135,7 @@ bool MailCMD::readMailFile(string fileName,vector<Mail>& mailList){
 
 void MailCMD::writeToFile(vector<Mail> mailList){
 
-    const char* fname="sendMail.xml";
+    const char* fname=".GTUVOSROOT/mailBackup.xml";
     QString filename (fname);
 
     QFile mailArchive(filename);

@@ -61,15 +61,6 @@ public:
     vector<Mail> getAllMails() const;
 
 
-    /**
-     * Get mailArchiveFileName
-     */
-    string getSentMailArchiveFileName() const{return sentMailFile;}
-    string getRecievedMailArchiveFileName() const{return recievedMailFile;}
-
-    const string getMailServerPath() const{
-        return MAILSERVERPATH;
-    }
 
     void addDraft(Mail newMail){ draftMail.push_back(newMail);}
 
@@ -92,8 +83,7 @@ private:
     string sentMailFile;
     string recievedMailFile;
 
-    const string MAILSERVERPATH = ".MailServer"; // hidden directory
-    const string MAILFILENAME = ".mails.txt";
+    const string MAILFILENAME = ".GTUVOSROOT/mailBackup.xml";
 
     vector<Mail> sentMail;
     vector<Mail> recievedMail;
